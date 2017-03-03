@@ -22,7 +22,7 @@ public class Recursion1 {
 			int current = 0;
 			int current2 = 0;
 			for (int i = 0; i < arr.length; i++) {
-				if (i + 1 < arr.length / 2) {
+				if (i + 1 <= arr.length / 2) {
 					Array1[current] = arr[i];
 					current++;
 				} else {
