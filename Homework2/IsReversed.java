@@ -2,6 +2,7 @@ package Homework2;
 
 public class IsReversed {
 
+	//TODO -- ignore whitespace, ignore capitalization
 	public boolean areReversed(String sOne, String sTwo) {
 		// are they the same length?
 		char[] one = sOne.toCharArray();
