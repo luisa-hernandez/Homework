@@ -9,8 +9,7 @@ public class Recursion2 {
 		// base case
 		if (n == 1) {
 			return 0;
-		}
-		else if(n == 0){
+		} else if (n == 0) {
 			return 1;
 		}
 
@@ -21,6 +20,7 @@ public class Recursion2 {
 			zeroCount++;
 		}
 
+		// recursion
 		return zeroCount + countZeroes(n / 2);
 	}
 
