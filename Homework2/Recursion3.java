@@ -7,17 +7,22 @@ public class Recursion3 {
 	public boolean isPalindrome(String str) {
 
 		str = str.toLowerCase();
-		
+
+		//check length (base case)
+		int length = str.length();
+		if (length < 2) {
+			return true;
+		}
+
 		int begin = 0;
 		int end = str.length() - 1;
-		int length = str.length();
 
 		// strip punctuation/whitespace at beginning
-		while (str.charAt(begin) < 'a' || str.charAt(end) > 'z') {
+		while (str.charAt(begin) < 'a' || str.charAt(begin) > 'z') {
 			begin++;
 			length--;
 			// hit base-case
-			if (begin == end - 1) {
+			if (begin <= end - 2) {
 				return true;
 			}
 		}
@@ -27,7 +32,7 @@ public class Recursion3 {
 			end--;
 			length--;
 			// hit base-case
-			if (begin == end - 1) {
+			if (begin <= end - 2) {
 				return true;
 			}
 		}
@@ -38,7 +43,7 @@ public class Recursion3 {
 		}
 
 		// check first and last string && middle
-		String substring = str.substring(begin+1, end);
+		String substring = str.substring(begin + 1, end);
 		if (str.charAt(begin) == str.charAt(end) && isPalindrome(substring)) {
 			// check the middle
 			return true;
@@ -53,14 +58,14 @@ public class Recursion3 {
 		strs.add("A but tuba.");
 		strs.add("A car, a man, a maraca.");
 		strs.add("Aibohphobia (fear of palindromes)");
-		
+
 		strs.add("Ummmmm that aren't");
 		strs.add("Just any word");
 		strs.add("Mirror");
-		
+
 		Recursion3 rc = new Recursion3();
-		
-		for(String str: strs){
+
+		for (String str : strs) {
 			System.out.println(str);
 			System.out.println(rc.isPalindrome(str));
 		}
