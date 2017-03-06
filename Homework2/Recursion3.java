@@ -61,7 +61,7 @@ public class Recursion3 {
 
 		strs.add("Ummmmm that aren't");
 		strs.add("Just any word");
-		strs.add("Mirror");
+		strs.add("Mirrorim");
 
 		Recursion3 rc = new Recursion3();
 
