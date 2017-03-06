@@ -72,6 +72,70 @@ public class Sorts {
 		System.out.println("");
 	}
 
+	public int[] quickSort(int[] ints) {
+
+		// base case
+		if (ints.length < 1) {
+			return ints;
+		}
+
+		// pick a pivot
+		int pivot = ints[0];
+
+		// divide integers into two sub lists
+		int smallerCount = 0;
+		int largerCount = 0;
+		for (int i = 0; i < ints.length; i++) {
+			// count smaller elements
+			if (ints[i] < pivot) {
+				smallerCount++;
+			}
+			// count larger/equal elements
+			if (ints[i] >= pivot) {
+				smallerCount++;
+			}
+		}
+
+		// create subarrays
+		int[] left = new int[smallerCount];
+		int[] right = new int[largerCount];
+		int leftIndex = 0;
+		int rightIndex = 0;
+
+		for (int i = 1; i < ints.length; i++) {
+			// put smaller elements in left subArray
+			if (ints[i] < pivot) {
+				left[leftIndex] = ints[i];
+				leftIndex++;
+			}
+			// put larger/equal elements in right subArray
+			if (ints[i] >= pivot) {
+				right[rightIndex] = ints[i];
+				rightIndex++;
+			}
+		}
+
+		// call quickSort on each sub list
+		left = quickSort(left);
+		right = quickSort(right);
+
+		// combine results
+		// left
+		for (int i = 0; i < left.length; i++) {
+			ints[i] = left[i];
+		}
+
+		// pivot
+		ints[left.length] = pivot;
+
+		// right
+		for (int i = 0; i < right.length; i++) {
+			ints[i + left.length + 1] = right[i];
+		}
+
+		return ints;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] numbers = new int[10];
@@ -96,11 +160,17 @@ public class Sorts {
 		int[] bsNumbers = bs.bubblesort(numbers);
 		bs.printArray(bsNumbers);
 		System.out.println();
-		
+
 		System.out.println("Recursive Bubble Sort");
 		int[] recursiveBsNumbers = bs.recursiveBubble(numbers);
 		bs.printArray(recursiveBsNumbers);
 		System.out.println();
+
+		System.out.println("Quick Sort");
+		int[] quickSortNumbers = bs.recursiveBubble(numbers);
+		bs.printArray(quickSortNumbers);
+		System.out.println();
+
 	}
 
 }
