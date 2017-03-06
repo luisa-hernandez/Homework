@@ -136,6 +136,10 @@ public class Sorts {
 		return ints;
 	}
 
+	public int[] insertionSort(int[] ints) {
+		return ints;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] numbers = new int[10];
