@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public class CensusSorter {
 
-	public ArrayList readFile(){
+	public ArrayList readFile(String filePath){
+		
+	//separate regional and state data	
 		return new ArrayList();
 	}
 	
@@ -12,9 +14,13 @@ public class CensusSorter {
 		
 	}
 	public static void main(String[] args) {
-		//read data file
+		CensusSorter census = new CensusSorter();
+		//ask user for file path
+		//use file Scanner
+		String path = "";
+		//read data file	
+		ArrayList populations = census.readFile(path);
 		
-
 	}
 
 }
