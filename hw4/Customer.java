@@ -8,12 +8,20 @@ public class Customer {
 	private int id;
 	private int arrivalTime;
 	private int waitTime;
-//	private Customer next;
+	private Customer nextCustomer;
 
-	public Customer(int id, int arrivalTime, Customer next) {
+	public Customer(int id, int arrivalTime) {
 		this.id = id;
 		this.arrivalTime = arrivalTime;
-//		this.next = next;
+		nextCustomer = null;
+	}
+
+	public void setNextCustomer(Customer nextCustomer) {
+		this.nextCustomer = nextCustomer;
+	}
+
+	public Customer nextCustomer() {
+		return nextCustomer;
 	}
 
 	public int id() {
@@ -27,9 +35,9 @@ public class Customer {
 	public void setWaitTime(int waitTime) {
 		this.waitTime = waitTime;
 	}
-	
-	public int waitTime(){
+
+	public int waitTime() {
 		return waitTime;
 	}
-	
+
 }
