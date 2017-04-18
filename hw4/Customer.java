@@ -8,10 +8,12 @@ public class Customer {
 	private int id;
 	private int arrivalTime;
 	private int waitTime;
+//	private Customer next;
 
-	public Customer(int id, int arrivalTime) {
+	public Customer(int id, int arrivalTime, Customer next) {
 		this.id = id;
 		this.arrivalTime = arrivalTime;
+//		this.next = next;
 	}
 
 	public int id() {

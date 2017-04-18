@@ -1,25 +1,19 @@
 package hw4;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
-public class Simulation {
+public class Simulation<G> {
 	/*
 	 * Program to simulate a business serving customers
 	 * 
 	 */
 	
-	//the queues
-	customerQueue<Customer>[] queues = new customerQueue[customers];
-	queriesQueue<String>[] 	queues = new queriesQueue[queries];
-	
-	//instantiate the queues
-	for (int i = 0; i < customers; i++) {
-		queues[i] = new customerQueue<Customer>();
+	private void stupid(){
+		LinkedList<G> whoever;
+		LinkedList<Customer> custs = new LinkedList<Customer>();
 	}
 	
-	for (int i = 0; i < queries; i++) {
-		queues[i] = new queriesQueue<String>();
-	}
 	
 
 	// class variables -- describe program state
@@ -44,6 +38,20 @@ public class Simulation {
 	
 
 	public Simulation(String customerFilePath, String queryFilePath) {
+		
+		//the queues
+		customerQueue<Customer>[] queues = new customerQueue[customers];
+		queriesQueue<String>[] 	queues = new queriesQueue[queries];
+		
+		//instantiate the queues
+		for (int i = 0; i < customers; i++) {
+			queues[i] = new customerQueue<Customer>();
+		}
+		
+		for (int i = 0; i < queries; i++) {
+			queues[i] = new queriesQueue<String>();
+		}
+		
 		// read data from files
 		readCustomerData(customerFilePath);
 		readQueryData(queryFilePath);
@@ -52,7 +60,7 @@ public class Simulation {
 		processData();
 
 		// maybe print results here?
-		outputResults();
+		outputData();
 	}
 
 	private void readCustomerData(String customerFilePath) {
