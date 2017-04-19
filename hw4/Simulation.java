@@ -1,18 +1,21 @@
 package hw4;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import Homework_1.Student;
 
 public class Simulation<G> {
 	/*
 	 * Program to simulate a business serving customers
 	 * 
 	 */
-
-	private void stupid() {
-		LinkedList<G> whoever;
-		LinkedList<Customer> custs = new LinkedList<Customer>();
-	}
 
 	// customers as linked list
 	private Customer firstCustomer;
@@ -22,34 +25,9 @@ public class Simulation<G> {
 	private int longestBreak;
 	private int idleTime;
 	private int longestLineGot;
-
-	// next customer from generator
-	Customer nextCust;
-
-	// holds customer for temporary use
-	Customer cust;
-
-	// count of customers started so far
-	int custStartCount = 0;
-
-	// count of customers finished so far
-	int custEndCount = 0;
+	private int serviceTime;
 
 	public Simulation(String customerFilePath, String queryFilePath) {
-
-		// the queues
-		customerQueue<Customer>[] queues = new customerQueue[customers];
-		queriesQueue<String>[] queues = new queriesQueue[queries];
-
-		// instantiate the queues
-		for (int i = 0; i < customers; i++) {
-			queues[i] = new customerQueue<Customer>();
-		}
-
-		for (int i = 0; i < queries; i++) {
-			queues[i] = new queriesQueue<String>();
-		}
-
 		// read data from files
 		readCustomerData(customerFilePath);
 		readQueryData(queryFilePath);
@@ -62,7 +40,40 @@ public class Simulation<G> {
 	}
 
 	private void readCustomerData(String customerFilePath) {
-		// update "customer" class variable
+		/**
+		 * load customers from a file
+		 */
+		File customerFile = new File(customerFilePath);
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(customerFilePath))) {
+			String line = reader.readLine();
+
+			// read the service time
+			serviceTime = Integer.parseInt(line);
+
+			// read the customer data
+			line = reader.readLine();
+			while (line != null) {
+				//read line to get ide
+				line = reader.readLine();
+				//convert line into integer
+				//int id = someId
+				
+				//read line to get arrival time
+				//string arrivetime = someTime
+				
+
+				//create customer object, attach to queue
+				//Customer c = new Customer(id, arrivetime);
+				//attach customer to last customer
+				
+				//lastly
+				line = reader.readLine();
+			}
+
+		} catch (IOException e) {
+			// first time running
+		}
 
 		// create a customer object for every customer
 	}
@@ -74,11 +85,6 @@ public class Simulation<G> {
 	private void processData() {
 		// update longest break, total idle time, and max line length
 		// "I guess just update all the counters."
-
-		// set customer generator and get first customer
-		customer.Gen.reset();
-		nextCust = customer.Gen.nextCustomer();
-
 	}
 
 	// method that prints results
