@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+
 import Homework_1.Student;
 
 public class Simulation<G> {
@@ -54,17 +55,24 @@ public class Simulation<G> {
 			// read the customer data
 			line = reader.readLine();
 			while (line != null) {
-				//read line to get ide
+				//read line to get id
 				line = reader.readLine();
+				
 				//convert line into integer
+				String[] id = line.split("[a-zA-Z]+");
+				
 				//int id = someId
 				
 				//read line to get arrival time
+				String[] arrivetime = line.split("[a-zA-Z]+");
 				//string arrivetime = someTime
 				
-
 				//create customer object, attach to queue
+				customer = new Customer(someID, someTime);
+				
+				
 				//Customer c = new Customer(id, arrivetime);
+				
 				//attach customer to last customer
 				
 				//lastly
