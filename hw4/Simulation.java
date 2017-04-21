@@ -59,16 +59,17 @@ public class Simulation<G> {
 				line = reader.readLine();
 				
 				//convert line into integer
-				String[] id = line.split("[a-zA-Z]+");
-				
+				String [] id = line.split("[a-zA-Z]+");
+				int someId = Integer.parseInt(id);
 				//int id = someId
 				
 				//read line to get arrival time
 				String[] arrivetime = line.split("[a-zA-Z]+");
+				int someTime = Integer.parseInt(arriveTime);
 				//string arrivetime = someTime
 				
 				//create customer object, attach to queue
-				customer = new Customer(someID, someTime);
+//				customer = new Customer(someID, someTime);
 				
 				
 				//Customer c = new Customer(id, arrivetime);
