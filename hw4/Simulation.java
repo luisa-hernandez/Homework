@@ -39,6 +39,15 @@ public class Simulation<G> {
 		// maybe print results here?
 		outputData();
 	}
+	
+	private int convertToSeconds (String arrivalTime){
+		String[] arrivalTimeArray = arrivalTime.split(":");
+		int hours = Integer.parseInt(arrivalTimeArray[0]);
+		int minutes = Integer.parseInt(arrivalTimeArray[1]);
+		int seconds = Integer.parseInt(arrivalTimeArray[2]);
+		return hours*60*60 + minutes*60 + seconds;
+	}
+	
 
 	private void readCustomerData(String customerFilePath) {
 		/**
@@ -57,26 +66,30 @@ public class Simulation<G> {
 			while (line != null) {
 				//read line to get id
 				line = reader.readLine();
-				
-				//convert line into integer
-				String [] id = line.split("[a-zA-Z]+");
-				int someId = Integer.parseInt(id);
-				//int id = someId
+				//get integer from end of string
+				int lastSpace = line.lastIndexOf(" ");
+				String idString = line.substring(lastSpace+1);
+				int id = Integer.parseInt(idString);
 				
 				//read line to get arrival time
-				String[] arrivetime = line.split("[a-zA-Z]+");
-				int someTime = Integer.parseInt(arriveTime);
-				//string arrivetime = someTime
+				line = reader.readLine();
+				//get arrival time from end of string
+				lastSpace = line.lastIndexOf(" ");
+				String arrivalTimeString = line.substring(lastSpace+1);
+				int arrivalTime = convertToSeconds(arrivalTimeString);
 				
 				//create customer object, attach to queue
-				customer = new Customer(someID, someTime);
-				
-				Customer c = new Customer(id, arrivetime);
-				
-				Node last = new Node();
-				last.item = customer;
+				Customer c = new Customer(id, arrivalTime);
 				
 				//attach customer to last customer
+				if(firstCustomer == null){
+					firstCustomer = c;
+					lastCustomer = c;
+				}
+				else{
+					lastCustomer.setNextCustomer(c);
+					lastCustomer = c;
+				}
 				
 				//lastly
 				line = reader.readLine();
@@ -105,7 +118,7 @@ public class Simulation<G> {
 		System.out.println("Cutomers in the group served: ");
 		System.out.println("Total idle time of employee: ");
 		System.out.println("Longest break employee has: ");
-		System.out.println("Longest waiting line: ");
+		System.out.println("Longest waiting line: " );
 
 	}
 
