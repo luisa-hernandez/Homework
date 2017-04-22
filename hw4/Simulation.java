@@ -43,6 +43,9 @@ public class Simulation<G> {
 	private int convertToSeconds (String arrivalTime){
 		String[] arrivalTimeArray = arrivalTime.split(":");
 		int hours = Integer.parseInt(arrivalTimeArray[0]);
+		if (hours >=1 && hours <=5){
+			hours += 12;
+		}
 		int minutes = Integer.parseInt(arrivalTimeArray[1]);
 		int seconds = Integer.parseInt(arrivalTimeArray[2]);
 		return hours*60*60 + minutes*60 + seconds;
