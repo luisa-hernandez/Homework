@@ -69,10 +69,12 @@ public class Simulation<G> {
 				//string arrivetime = someTime
 				
 				//create customer object, attach to queue
-//				customer = new Customer(someID, someTime);
+				customer = new Customer(someID, someTime);
 				
+				Customer c = new Customer(id, arrivetime);
 				
-				//Customer c = new Customer(id, arrivetime);
+				Node last = new Node();
+				last.item = customer;
 				
 				//attach customer to last customer
 				
@@ -99,6 +101,11 @@ public class Simulation<G> {
 	// method that prints results
 	private void outputData() {
 		// make them fancy print statements
+		System.out.println("The person will wait:" );
+		System.out.println("Cutomers in the group served: ");
+		System.out.println("Total idle time of employee: ");
+		System.out.println("Longest break employee has: ");
+		System.out.println("Longest waiting line: ");
 
 	}
 
