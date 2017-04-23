@@ -38,9 +38,6 @@ public class Simulation {
 		// process data and queries
 		processCustomers();
 		processQueries();
-
-		// maybe print results here?
-		outputData();
 	}
 
 	private int convertToSeconds(String arrivalTime) {
@@ -221,17 +218,6 @@ public class Simulation {
 			// "Next!"
 			currentCustomer = currentCustomer.nextCustomer();
 		}
-	}
-
-	// method that prints results
-	private void outputData() {
-		// make them fancy print statements
-		System.out.println("The person will wait:");
-		System.out.println("Cutomers in the group served: ");
-		System.out.println("Total idle time of employee: ");
-		System.out.println("Longest break employee has: ");
-		System.out.println("Longest waiting line: ");
-
 	}
 
 	public static void main(String[] args) {
