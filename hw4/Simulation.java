@@ -9,9 +9,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import Homework_1.Student;
-
-public class Simulation<G> {
+public class Simulation {
 	/*
 	 * Program to simulate a business serving customers
 	 * 
