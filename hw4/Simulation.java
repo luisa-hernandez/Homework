@@ -39,6 +39,7 @@ public class Simulation<G> {
 
 		// process data and queries
 		processCustomers();
+		processQueries();
 
 		// maybe print results here?
 		outputData();
@@ -119,10 +120,41 @@ public class Simulation<G> {
 				queries.add(line);
 			}
 
-		}
-
-		catch (IOException e) {
+		} catch (IOException e) {
 			// first time running
+		}
+	}
+
+	private int numberOfCustomersServed() {
+		return customersServed;
+	}
+
+	private int longestBreakLength() {
+		return longestBreak;
+	}
+
+	private int totalIdleTime() {
+		return idleTime;
+	}
+
+	private int maxPeopleServed() {
+		return longestLineGot;
+	}
+	
+	private int waitingTime(int customerID){
+		//search linked list of customers
+		
+		//return waiting time
+		
+		//if customer not found, return null
+		return -1;
+	}
+
+	private void processQueries() {
+		for (int i = 0; i < queries.size(); i++) {
+			String query = queries.get(i);
+
+			// can process query
 		}
 	}
 
@@ -177,12 +209,12 @@ public class Simulation<G> {
 
 			// update the length of the line
 			updateLineLength(currentCustomer, currentTime);
-			
-			//update idle time
+
+			// update idle time
 			idleTime += breakTime;
-			
-			//update longest break
-			if(breakTime > longestBreak){
+
+			// update longest break
+			if (breakTime > longestBreak) {
 				longestBreak = breakTime;
 			}
 
