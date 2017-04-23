@@ -31,7 +31,7 @@ public class Simulation<G> {
 
 	public Simulation(String customerFilePath, String queryFilePath) {
 		customersServed = 0;
-		longestLineGot =0;
+		longestLineGot = 0;
 		idleTime = 0;
 		// read data from files
 		readCustomerData(customerFilePath);
@@ -86,9 +86,9 @@ public class Simulation<G> {
 				// create customer object, attach to queue
 				Customer c = new Customer(id, arrivalTime);
 
-				//TODO: only if customer arrived before 5PM
-				//if statement
-				
+				// TODO: only if customer arrived before 5PM
+				// if statement
+
 				// attach customer to last customer
 				if (firstCustomer == null) {
 					firstCustomer = c;
@@ -115,7 +115,7 @@ public class Simulation<G> {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(queryFilePath))) {
 			String line = reader.readLine();
-			while (line != null && line != ""){
+			while (line != null && line != "") {
 				queries.add(line);
 			}
 
@@ -126,38 +126,71 @@ public class Simulation<G> {
 		}
 	}
 
+	private void updateLineLength(Customer current, int currentTime) {
+		// count how long the line is
+		int lineLength = 0;
+		Customer next = current.nextCustomer();
+
+		while (next != null && next.arrivalTime() <= currentTime) {
+			lineLength += 1;
+			next = next.nextCustomer();
+		}
+
+		// set max line length
+		if (lineLength > longestLineGot) {
+			longestLineGot = lineLength;
+		}
+	}
+
 	private void processCustomers() {
 		// update longest break, total idle time, and max line length
 		// "I guess just update all the counters."
 		Customer currentCustomer = firstCustomer;
-		int currentTime = 9*60*60;
+
+		// day starts at 9am
+		int currentTime = 9 * 60 * 60;
+		// 5PM = 17
+		int closingTime = 17 * 60 * 60;
+
+		// break time
 		int breakTime = 0;
-		while(currentCustomer != null){
-			if(currentCustomer.arrivalTime() > currentTime){
+		while (currentCustomer != null && currentCustomer.arrivalTime() <= currentTime) {
+			// check to make sure customer "arrives" before current time
+			if (currentCustomer.arrivalTime() > currentTime) {
+				// update break time
 				breakTime = currentCustomer.arrivalTime() - currentTime;
+				// "serve" customer
 				currentTime = currentCustomer.arrivalTime();
-			}
-			else{
+			} else {
 				currentTime += serviceTime;
-				breakTime = 0;
 			}
+
+			// update wait time
+			int waitTime = currentTime - currentCustomer.arrivalTime();
+			if (waitTime > 0) {
+				currentCustomer.setWaitTime(waitTime);
+			} else {
+				currentCustomer.setWaitTime(0);
+			}
+
 			customersServed += 1;
+
+			// update the length of the line
+			updateLineLength(currentCustomer, currentTime);
+			
+			//update idle time
+			idleTime += breakTime;
+			
+			//update longest break
+			if(breakTime > longestBreak){
+				longestBreak = breakTime;
+			}
+
+			// "Next!"
 			currentCustomer = currentCustomer.nextCustomer();
-			
-			Customer lineCustomer = currentCustomer;
-			int lineLength = 0;
-			
-			while (lineCustomer != null && lineCustomer.arrivalTime() <= currentTime){
-				lineLength +=1;
-				lineCustomer = lineCustomer.nextCustomer();
-			}
-			if(lineLength > longestLineGot){
-				longestLineGot = lineLength;
-			}
-			
 		}
-	}		
-	
+	}
+
 	// method that prints results
 	private void outputData() {
 		// make them fancy print statements
