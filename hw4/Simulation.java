@@ -125,28 +125,12 @@ public class Simulation<G> {
 		}
 	}
 
-	private int numberOfCustomersServed() {
-		return customersServed;
-	}
+	private int waitingTime(int customerID) {
+		// search linked list of customers
 
-	private int longestBreakLength() {
-		return longestBreak;
-	}
+		// return waiting time
 
-	private int totalIdleTime() {
-		return idleTime;
-	}
-
-	private int maxPeopleServed() {
-		return longestLineGot;
-	}
-	
-	private int waitingTime(int customerID){
-		//search linked list of customers
-		
-		//return waiting time
-		
-		//if customer not found, return null
+		// if customer not found, return null
 		return -1;
 	}
 
@@ -154,7 +138,25 @@ public class Simulation<G> {
 		for (int i = 0; i < queries.size(); i++) {
 			String query = queries.get(i);
 
-			// can process query
+			// repeat the query
+			// followed by a colon (:)
+			// followed by the query-answer
+			if (query == "TOTAL-IDLE-TIME") {
+				System.out.println(query + ":" + idleTime);
+			} else if (query == "LONGEST-BREAK-LENGTH") {
+				System.out.println(query + ":" + longestBreak);
+			} else if (query == "NUMBER-OF-CUSTOMERS-SERVED") {
+				System.out.println(query + ":" + customersServed);
+			} else if (query == "MAXIMUM-NUMBER-OF-PEOPLE-IN-QUEUE-AT-ANY-TIME") {
+				System.out.println(query + ":" + longestLineGot);
+			} else if (query.startsWith("WAITING-TIME-OF")) {
+				// get integer from end of string
+				int id = Integer.parseInt(query.substring(query.lastIndexOf(" ")));
+				System.out.println(query + ":" + waitingTime(id));
+			} else {
+				System.out.println("INVALID QUERY");
+			}
+
 		}
 	}
 
