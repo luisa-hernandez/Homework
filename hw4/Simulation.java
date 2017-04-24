@@ -113,6 +113,7 @@ public class Simulation {
 			String line = reader.readLine();
 			while (line != null && line != "") {
 				queries.add(line);
+				line = reader.readLine();
 			}
 
 		} catch (IOException e) {
@@ -136,13 +137,13 @@ public class Simulation {
 			// repeat the query
 			// followed by a colon (:)
 			// followed by the query-answer
-			if (query == "TOTAL-IDLE-TIME") {
+			if (query.equals("TOTAL-IDLE-TIME")) {
 				System.out.println(query + ":" + idleTime);
-			} else if (query == "LONGEST-BREAK-LENGTH") {
+			} else if (query.equals("LONGEST-BREAK-LENGTH")) {
 				System.out.println(query + ":" + longestBreak);
-			} else if (query == "NUMBER-OF-CUSTOMERS-SERVED") {
+			} else if (query.equals("NUMBER-OF-CUSTOMERS-SERVED")) {
 				System.out.println(query + ":" + customersServed);
-			} else if (query == "MAXIMUM-NUMBER-OF-PEOPLE-IN-QUEUE-AT-ANY-TIME") {
+			} else if (query.equals("MAXIMUM-NUMBER-OF-PEOPLE-IN-QUEUE-AT-ANY-TIME")) {
 				System.out.println(query + ":" + longestLineGot);
 			} else if (query.startsWith("WAITING-TIME-OF")) {
 				// get integer from end of string
@@ -189,17 +190,13 @@ public class Simulation {
 				// update break time
 				breakTime = currentCustomer.arrivalTime() - currentTime;
 				// "serve" customer
-				currentTime = currentCustomer.arrivalTime();
-			} else {
-				currentTime += serviceTime;
-			}
-
-			// update wait time
-			int waitTime = currentTime - currentCustomer.arrivalTime();
-			if (waitTime > 0) {
-				currentCustomer.setWaitTime(waitTime);
-			} else {
 				currentCustomer.setWaitTime(0);
+				currentTime = currentCustomer.arrivalTime() + serviceTime;
+			} else {
+				// update wait time
+				int waitTime = currentTime - currentCustomer.arrivalTime();
+				currentCustomer.setWaitTime(waitTime);
+				currentTime += serviceTime;
 			}
 
 			customersServed += 1;
@@ -220,6 +217,7 @@ public class Simulation {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// args[0] = customer file path
 		// args[1] = query file path
