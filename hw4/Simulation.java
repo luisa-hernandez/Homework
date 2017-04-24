@@ -82,9 +82,6 @@ public class Simulation {
 				// create customer object, attach to queue
 				Customer c = new Customer(id, arrivalTime);
 
-				// TODO: only if customer arrived before 5PM
-				// if statement
-
 				// attach customer to last customer
 				if (firstCustomer == null) {
 					firstCustomer = c;
@@ -148,17 +145,17 @@ public class Simulation {
 			// followed by a colon (:)
 			// followed by the query-answer
 			if (query.equals("TOTAL-IDLE-TIME")) {
-				System.out.println(query + ":" + idleTime);
+				System.out.println(query + ": " + idleTime);
 			} else if (query.equals("LONGEST-BREAK-LENGTH")) {
-				System.out.println(query + ":" + longestBreak);
+				System.out.println(query + ": " + longestBreak);
 			} else if (query.equals("NUMBER-OF-CUSTOMERS-SERVED")) {
-				System.out.println(query + ":" + customersServed);
+				System.out.println(query + ": " + customersServed);
 			} else if (query.equals("MAXIMUM-NUMBER-OF-PEOPLE-IN-QUEUE-AT-ANY-TIME")) {
-				System.out.println(query + ":" + longestLineGot);
+				System.out.println(query + ": " + longestLineGot);
 			} else if (query.startsWith("WAITING-TIME-OF")) {
 				// get integer from end of string
 				int id = Integer.parseInt(query.substring(query.lastIndexOf(" ") + 1));
-				System.out.println(query + ":" + waitingTime(id));
+				System.out.println(query + ": " + waitingTime(id));
 			} else {
 				System.out.println("INVALID QUERY");
 			}
@@ -172,7 +169,7 @@ public class Simulation {
 		Customer next = current;
 
 		while (next != null && next.arrivalTime() <= currentTime) {
-			if (next.arrivalTime() < currentTime) {
+			if (next.arrivalTime() < currentTime + serviceTime) {
 				lineLength += 1;
 			}
 			next = next.nextCustomer();
@@ -195,10 +192,9 @@ public class Simulation {
 		// TODO -- handle customers that arrive late
 		int closingTime = 61200;
 
-		// update the length of the line
-		updateLineLength(currentCustomer, currentTime);
-
 		while (currentCustomer != null && currentCustomer.arrivalTime() <= closingTime) {
+			// update the length of the line
+			updateLineLength(currentCustomer, currentTime);
 
 			// break time
 			int breakTime;
