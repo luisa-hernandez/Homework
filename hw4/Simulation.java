@@ -147,7 +147,7 @@ public class Simulation {
 				System.out.println(query + ":" + longestLineGot);
 			} else if (query.startsWith("WAITING-TIME-OF")) {
 				// get integer from end of string
-				int id = Integer.parseInt(query.substring(query.lastIndexOf(" ")));
+				int id = Integer.parseInt(query.substring(query.lastIndexOf(" ")+1));
 				System.out.println(query + ":" + waitingTime(id));
 			} else {
 				System.out.println("INVALID QUERY");
