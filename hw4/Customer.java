@@ -14,6 +14,7 @@ public class Customer {
 		this.id = id;
 		this.arrivalTime = arrivalTime;
 		nextCustomer = null;
+		waitTime = 0;
 	}
 
 	public void setNextCustomer(Customer nextCustomer) {

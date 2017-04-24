@@ -123,8 +123,15 @@ public class Simulation {
 
 	private int waitingTime(int customerID) {
 		// search linked list of customers
-
+		Customer current = firstCustomer;
 		// return waiting time
+		if (current.id() == customerID) {
+			// this is our customer
+			return current.waitTime();
+		} else {
+			// not our customer
+			current = current.nextCustomer();
+		}
 
 		// if customer not found, return null
 		return -1;
@@ -147,7 +154,7 @@ public class Simulation {
 				System.out.println(query + ":" + longestLineGot);
 			} else if (query.startsWith("WAITING-TIME-OF")) {
 				// get integer from end of string
-				int id = Integer.parseInt(query.substring(query.lastIndexOf(" ")+1));
+				int id = Integer.parseInt(query.substring(query.lastIndexOf(" ") + 1));
 				System.out.println(query + ":" + waitingTime(id));
 			} else {
 				System.out.println("INVALID QUERY");
@@ -182,27 +189,25 @@ public class Simulation {
 		// day starts at 9am, i.e. 32400 seconds
 		int currentTime = 32400;
 		// 5PM = 17, i.e. 61200 seconds
-		//TODO -- handle customers that arrive late
+		// TODO -- handle customers that arrive late
 		int closingTime = 61200;
 
 		// update the length of the line
 		updateLineLength(currentCustomer, currentTime);
 
-		// break time
-		int breakTime;
 		while (currentCustomer != null && currentCustomer.arrivalTime() <= closingTime) {
-			// check to make sure customer "arrives" before current time
+
+			// break time
+			int breakTime;
+			// gap between customers
 			if (currentCustomer.arrivalTime() > currentTime) {
-				// update break time
 				breakTime = currentCustomer.arrivalTime() - currentTime;
-				// "serve" customer
-				currentCustomer.setWaitTime(0);
-				currentTime = currentCustomer.arrivalTime() + serviceTime;
-			} else {
+				currentTime += breakTime;
+			}
+			// no gap between customers
+			else {
 				breakTime = 0;
-				// update wait time
 				currentCustomer.setWaitTime(currentTime - currentCustomer.arrivalTime());
-				currentTime += serviceTime;
 			}
 
 			customersServed += 1;
@@ -216,6 +221,7 @@ public class Simulation {
 			}
 
 			// "Next!"
+			currentTime += serviceTime;
 			currentCustomer = currentCustomer.nextCustomer();
 		}
 	}
