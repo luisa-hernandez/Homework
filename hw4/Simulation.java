@@ -159,10 +159,12 @@ public class Simulation {
 	private void updateLineLength(Customer current, int currentTime) {
 		// count how long the line is
 		int lineLength = 0;
-		Customer next = current.nextCustomer();
+		Customer next = current;
 
 		while (next != null && next.arrivalTime() <= currentTime) {
-			lineLength += 1;
+			if (next.arrivalTime() < currentTime) {
+				lineLength += 1;
+			}
 			next = next.nextCustomer();
 		}
 
@@ -177,14 +179,18 @@ public class Simulation {
 		// "I guess just update all the counters."
 		Customer currentCustomer = firstCustomer;
 
-		// day starts at 9am
-		int currentTime = 9 * 60 * 60;
-		// 5PM = 17
-		int closingTime = 17 * 60 * 60;
+		// day starts at 9am, i.e. 32400 seconds
+		int currentTime = 32400;
+		// 5PM = 17, i.e. 61200 seconds
+		//TODO -- handle customers that arrive late
+		int closingTime = 61200;
+
+		// update the length of the line
+		updateLineLength(currentCustomer, currentTime);
 
 		// break time
-		int breakTime = 0;
-		while (currentCustomer != null && currentCustomer.arrivalTime() <= currentTime) {
+		int breakTime;
+		while (currentCustomer != null && currentCustomer.arrivalTime() <= closingTime) {
 			// check to make sure customer "arrives" before current time
 			if (currentCustomer.arrivalTime() > currentTime) {
 				// update break time
@@ -193,16 +199,13 @@ public class Simulation {
 				currentCustomer.setWaitTime(0);
 				currentTime = currentCustomer.arrivalTime() + serviceTime;
 			} else {
+				breakTime = 0;
 				// update wait time
-				int waitTime = currentTime - currentCustomer.arrivalTime();
-				currentCustomer.setWaitTime(waitTime);
+				currentCustomer.setWaitTime(currentTime - currentCustomer.arrivalTime());
 				currentTime += serviceTime;
 			}
 
 			customersServed += 1;
-
-			// update the length of the line
-			updateLineLength(currentCustomer, currentTime);
 
 			// update idle time
 			idleTime += breakTime;
