@@ -124,13 +124,16 @@ public class Simulation {
 	private int waitingTime(int customerID) {
 		// search linked list of customers
 		Customer current = firstCustomer;
-		// return waiting time
-		if (current.id() == customerID) {
-			// this is our customer
-			return current.waitTime();
-		} else {
-			// not our customer
-			current = current.nextCustomer();
+
+		while (current != null) {
+			// return waiting time
+			if (current.id() == customerID) {
+				// this is our customer
+				return current.waitTime();
+			} else {
+				// not our customer
+				current = current.nextCustomer();
+			}
 		}
 
 		// if customer not found, return null
