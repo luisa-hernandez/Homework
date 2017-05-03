@@ -1,6 +1,6 @@
 package hw5;
 
-public class Simulation {
+public class Community {
 	public static void main(String[] args){
 		
 	}
