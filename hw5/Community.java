@@ -78,12 +78,12 @@ public class Community {
 				String fatherSNString = line.substring(lastFatherSpace + 1);
 				int fatherSN = Integer.parseInt(fatherSNString);
 
-				// ****************but also separate by commas (split method)
 				// read line to get friends
 				line = reader.readLine();
 				// get integer from end of string
 				int friendsSpace = line.lastIndexOf(" ");
 				String friendsString = line.substring(friendsSpace + 1);
+				//separate friends by commas using split method
 				int friends = Integer.parseInt(friendsString);
 			}
 		}
@@ -93,9 +93,7 @@ public class Community {
 
 		// shuffle the people array list
 		ArrayList<String> shufflePeople = new ArrayList<String>();
-		Collections.shuffle
-		
-		
+		Collections.shuffle(shufflePeople);
 
 		// put the people in the binary search tree
 
@@ -105,12 +103,12 @@ public class Community {
 	}
 
 	public static void main(String[] args) {
-		//args[0] is query file path
-		//args[1] is person file path
-		
+		// args[0] is query file path
+		// args[1] is person file path
+
 		// TODO 0 - instantiate Community class w/ paths of files
 		Community comm = new Community(args[0], args[1]);
-		
+
 	}
 
 }
