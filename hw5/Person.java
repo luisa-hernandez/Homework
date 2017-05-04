@@ -41,7 +41,7 @@ public class Person {
 		return fatherSSN;
 	}
 	
-	public ArrayList getfriends(){
+	public ArrayList<Integer> getfriends(){
 		return friends;
 	}
 

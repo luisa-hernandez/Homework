@@ -89,33 +89,37 @@ public class Community {
 				int friendsSpace = line.lastIndexOf(" ");
 				String friendsString = line.substring(friendsSpace + 1);
 				//separate friends by commas using split method
-				//***
-				int friends = Integer.parseInt(friendsString);
+				String [] friends = friendsString.split(",");
+				ArrayList<Integer> intFriends = new ArrayList<Integer>();
+				for(int i=0; i<friends.length; i++){
+					intFriends.add(Integer.parseInt(friends[i]));
+				}
+			
+				// create a person and add each one to the people array list
+				Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, intFriends);
 			}
 		}
 
-		// create a person and add each one to the people array list
-		Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, friends);
 
 		// shuffle the people array list
 		ArrayList<String> shufflePeople = new ArrayList<String>();
 		Collections.shuffle(shufflePeople);
 
 		// put the people in the binary search tree
-		public void addPeople(ArrayList<String> shufflePeople, Node n){
-			if (n== null){
-				n=(Node) s;
+		public void addPeople(ArrayList<String> shufflePeople, Node root){
+			if (root == null){
+				root = (Node) s;
 			}
 			else if (s.compareTo(n) < 0){
-				add(s, n.leftChild);
+				root.left = add(s, root.leftChild);
 			}
 			else {
-				add(s, n.rightChild);	
+				root.right = add(s, root.rightChild);	
 			}
 		}
-
-		catch (IOException e) {
-		}
+//
+//		catch (IOException e) {
+//		}
 
 	}
 
@@ -124,7 +128,7 @@ public class Community {
 		// args[1] is person file path
 
 		// TODO 0 - instantiate Community class w/ paths of files
-		Community comm = new Community(args[0], args[1]);
+		Community community = new Community(args[0], args[1]);
 
 	}
 
