@@ -21,6 +21,8 @@ class PNode<K, V> {
 
 public class PeopleTree<K, V> {
 
+	Node root = null;
+
 	public PeopleTree() {
 	}
 
@@ -35,9 +37,4 @@ public class PeopleTree<K, V> {
 	public void insert(K key, V value) {
 
 	}
-
-	public static void main(String[] args) {
-
-	}
-
 }
