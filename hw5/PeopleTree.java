@@ -1,27 +1,8 @@
 package hw5;
 
-class PNode<K, V> {
+public class PeopleTree<K extends Comparable<K>, V> {
 
-	private K key;
-	private V value;
-
-	public PNode(K key, V value) {
-		this.key = key;
-		this.value = value;
-	}
-
-	public V getValue() {
-		return value;
-	}
-
-	public K getKey() {
-		return key;
-	}
-} // end class Node
-
-public class PeopleTree<K, V> {
-
-	Node root = null;
+	PNode<K, V> root = null;
 
 	public PeopleTree() {
 	}
@@ -35,6 +16,30 @@ public class PeopleTree<K, V> {
 	}
 
 	public void insert(K key, V value) {
+		PNode<K, V> node = new PNode<K, V>(key, value);
+		if (root == null) {
+			root = node;
+		} else {
+			boolean done = false;
+			PNode<K, V> current = root;
+
+			while (!done) {
+				// compare keys
+				if (node.compareTo(current) < 0) {
+					// go to left
+					if(current.getLeft() == null){
+						current.setLeft(node);
+						done = true;
+					}
+
+				} else {
+					// go to right
+				}
+
+			}
+
+		}
 
 	}
+
 }
