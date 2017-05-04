@@ -30,7 +30,7 @@ public class Community {
 
 	private void readQueryFile(String queryFilePath) {
 		queries = new ArrayList<String>();
-		try (BufferedReader reader = new BufferedReader(new FileReader(queryFile))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(queryFilePath))) {
 			String line = reader.readLine();
 			while (line != null) {
 				queries.add(line);
