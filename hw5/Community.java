@@ -99,7 +99,7 @@ public class Community {
 				// create a person and add each one to the people array list
 				Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, intFriends);
 				
-				//TODO -- insert person into people tree
+				//TODO 2 -- insert person into people tree
 			}
 		}
 
