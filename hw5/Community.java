@@ -19,6 +19,7 @@ public class Community {
 	private int lastName;
 	private int motherSSN;
 	private int fatherSSN;
+	private PeopleTree<Integer, Person> pTree;
 
 	public Community(String peopleFile, String queryFile) {
 		// query file
@@ -97,6 +98,8 @@ public class Community {
 			
 				// create a person and add each one to the people array list
 				Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, intFriends);
+				
+				//TODO -- insert person into people tree
 			}
 		}
 

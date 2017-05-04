@@ -11,9 +11,9 @@ public class PeopleTree<K extends Comparable<K>, V> {
 		return null;
 	}
 
-	public void delete(K key) {
-
-	}
+//	public void delete(K key) {
+//
+//	}
 
 	public void insert(K key, V value) {
 		PNode<K, V> node = new PNode<K, V>(key, value);
@@ -25,15 +25,28 @@ public class PeopleTree<K extends Comparable<K>, V> {
 
 			while (!done) {
 				// compare keys
+				
 				if (node.compareTo(current) < 0) {
 					// go to left
 					if(current.getLeft() == null){
+						//left is free, so set left child
 						current.setLeft(node);
 						done = true;
+					}else{
+						//left is not free, set current to left
+						current = current.getLeft();
 					}
 
 				} else {
 					// go to right
+					
+					//TODO -- write code to insert into right child
+					
+					// 1- is right free?
+					
+					// 2- if not, compare to right child
+					
+					
 				}
 
 			}
