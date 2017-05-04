@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import hw4.Customer;
-import hw4.Simulation;
-
 public class Community {
 
 	// queries as linked list
