@@ -1,27 +1,43 @@
 package hw5;
 
-import java.util.ArrayList;
+class PNode<K, V> {
+
+	private K key;
+	private V value;
+
+	public PNode(K key, V value) {
+		this.key = key;
+		this.value = value;
+	}
+
+	public V getValue() {
+		return value;
+	}
+
+	public K getKey() {
+		return key;
+	}
+} // end class Node
 
 public class PeopleTree<K, V> {
 
 	public PeopleTree() {
-		ArrayList<Integer> whatever = new ArrayList<Integer>();
 	}
 
 	public V find(K key) {
 		return null;
 	}
-	
-	public void delete(K key){
-		
+
+	public void delete(K key) {
+
 	}
-	
-	public void insert(K key, V value){
-		
+
+	public void insert(K key, V value) {
+
 	}
 
 	public static void main(String[] args) {
-		
+
 	}
 
 }
