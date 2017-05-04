@@ -21,7 +21,6 @@ public class Community {
 	private int fatherSSN;
 
 	public Community(String peopleFile, String queryFile) {
-		// TODO 1 -read input files and process information
 		// query file
 		readQueryFile(queryFile);
 
@@ -31,7 +30,16 @@ public class Community {
 
 	private void readQueryFile(String queryFilePath) {
 		queries = new ArrayList<String>();
-		// TODO: do the rest of the things
+		try (BufferedReader reader = new BufferedReader(new FileReader(queryFile))) {
+			String line = reader.readLine();
+			while (line != null) {
+				queries.add(line);
+				line = reader.readLine();
+			}
+
+		} catch (IOException e) {
+			// first time running
+		}
 	}
 
 	private void readPersonFile(String personFilePath) {
@@ -81,6 +89,7 @@ public class Community {
 				int friendsSpace = line.lastIndexOf(" ");
 				String friendsString = line.substring(friendsSpace + 1);
 				//separate friends by commas using split method
+				//***
 				int friends = Integer.parseInt(friendsString);
 			}
 		}
@@ -93,6 +102,17 @@ public class Community {
 		Collections.shuffle(shufflePeople);
 
 		// put the people in the binary search tree
+		public void addPeople(ArrayList<String> shufflePeople, Node n){
+			if (n== null){
+				n=(Node) s;
+			}
+			else if (s.compareTo(n) < 0){
+				add(s, n.leftChild);
+			}
+			else {
+				add(s, n.rightChild);	
+			}
+		}
 
 		catch (IOException e) {
 		}
