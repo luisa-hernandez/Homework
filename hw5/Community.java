@@ -21,8 +21,48 @@ public class Community {
 		// person files
 		readPersonFile(peopleFile);
 	}
+	
+	private void processQueries(){
+		
+	}
+	
+	private String nameOf(){
+		return null;
+	}
+	
+	private String fatherOf(){
+		return null;
+	}
+	
+	private String motherOf(){
+		return null;
+	}
+	
+	private String halfSiblingsOf(){
+		return null;
+	}
+	
+	private String fullSiblingsOf(){
+		return null;
+	}
+	
+	private String childrenOf(){
+		return null;
+	}
+	
+	private String mutualFriendsOf(){
+		return null;
+	}
 
-	private void readQueryFile(String queryFilePath) {
+	private String inverseFriendsOf(){
+		return null;
+	}
+	
+	private String mostMutualFriends(){
+		return null;
+	}
+	
+	private void readQueryFile(String queryFilePath) throws FileNotFoundException, IOException {
 		queries = new ArrayList<String>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(queryFilePath))) {
 			String line = reader.readLine();
@@ -30,9 +70,6 @@ public class Community {
 				queries.add(line);
 				line = reader.readLine();
 			}
-
-		} catch (IOException e) {
-			// first time running
 		}
 	}
 
