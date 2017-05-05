@@ -100,6 +100,17 @@ public class Community {
 				Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, intFriends);
 				
 				//TODO 2 -- insert person into people tree
+				public void addPeople(ArrayList<String> shufflePeople, Node root){
+					if (root == null){
+						root = (Node) s;
+					}
+					else if (s.compareTo(n) < 0){
+						root.left = add(s, root.leftChild);
+					}
+					else {
+						root.right = add(s, root.rightChild);	
+					}
+				}
 			}
 		}
 
@@ -108,19 +119,6 @@ public class Community {
 		ArrayList<String> shufflePeople = new ArrayList<String>();
 		Collections.shuffle(shufflePeople);
 
-		// put the people in the binary search tree
-		public void addPeople(ArrayList<String> shufflePeople, Node root){
-			if (root == null){
-				root = (Node) s;
-			}
-			else if (s.compareTo(n) < 0){
-				root.left = add(s, root.leftChild);
-			}
-			else {
-				root.right = add(s, root.rightChild);	
-			}
-		}
-//
 //		catch (IOException e) {
 //		}
 
