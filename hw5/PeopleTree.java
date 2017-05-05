@@ -31,24 +31,6 @@ public class PeopleTree<K extends Comparable<K>, V> {
 		return node;
 	}
 
-	/**
-	 * Looking for a PNode based on key. Delete if found.
-	 * 
-	 * @param key
-	 */
-	// public void delete(K key) {
-	//
-	//
-	// if (node.compareTo(current) < 0){
-	// node.left = remove (key);
-	// }
-	// else if (node.compareTo(current) > 0){
-	// node.right = remove(key);
-	// }
-	// else if
-	//
-	// }
-
 	public void insert(K key, V value) {
 		PNode<K, V> node = new PNode<K, V>(key, value);
 		if (root == null) {
@@ -75,20 +57,13 @@ public class PeopleTree<K extends Comparable<K>, V> {
 				} else {
 					// go to right
 					if (current.getRight() == null) {
+						current.setRight(node);
+						done = true;
 
 					} else {
+						// if right is not free, set current to right
 						current = current.getRight();
 					}
-
-					// TODO -- write code to insert into right child
-
-					// 1- is right free?
-					current.setRight(node);
-					done = true;
-					current = current.getRight();
-
-					// 2- if not, compare to right child
-
 				}
 
 			}
