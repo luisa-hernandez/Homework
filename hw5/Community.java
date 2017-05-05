@@ -23,27 +23,61 @@ public class Community {
 	}
 	
 	private void processQueries(){
+		for (String query: queries){
+			String result = "";
+			
+			if (query.startsWith("NAME")){
+				result = nameOf();
+			}
+			else if (query.startsWith("FATHER")){
+				result = fatherOf();
+			}
+			else if (query.startsWith("MOTHER")){
+				result = motherOf();
+			}
+			else if (query.startsWith("HALF")){
+				result = halfSiblingsOf();
+			}
+			else if (query.startsWith("FULL")){
+				result = fullSiblingsOf();
+			}
+			else if (query.startsWith("CHILDREN")){
+				result = childrenOf();
+			}
+			else if (query.startsWith("MUTUAL")){
+				result = mutualFriendsOf();
+			}
+			else if (query.startsWith("INVERSE")){
+				result = inverseFriendsOf();
+			}
+			else{
+				//"WHO"
+				result = mostMutualFriends();
+			}
+			
+			System.out.println(query + ": " + result);
+		}
 		
 	}
 	
 	private String nameOf(){
-		return null;
+		return "";
 	}
 	
 	private String fatherOf(){
-		return null;
+		return "";
 	}
 	
 	private String motherOf(){
-		return null;
+		return "";
 	}
 	
 	private String halfSiblingsOf(){
-		return null;
+		return "";
 	}
 	
 	private String fullSiblingsOf(){
-		return null;
+		return "";
 	}
 	
 	private String childrenOf(){
@@ -51,15 +85,15 @@ public class Community {
 	}
 	
 	private String mutualFriendsOf(){
-		return null;
+		return "";
 	}
 
 	private String inverseFriendsOf(){
-		return null;
+		return "";
 	}
 	
 	private String mostMutualFriends(){
-		return null;
+		return "";
 	}
 	
 	private void readQueryFile(String queryFilePath) throws FileNotFoundException, IOException {
