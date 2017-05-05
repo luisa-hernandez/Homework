@@ -1,22 +1,20 @@
 package hw5;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Community {
 
 	// queries as linked list
 	private ArrayList<String> queries;
-	private ArrayList<Integer> friends;
 
 	// variables
 	private PeopleTree<Integer, Person> pTree;
 
-	public Community(String peopleFile, String queryFile) {
+	public Community(String peopleFile, String queryFile) throws FileNotFoundException, IOException {
 		// query file
 		readQueryFile(queryFile);
 
@@ -38,9 +36,7 @@ public class Community {
 		}
 	}
 
-	private void readPersonFile(String personFilePath) {
-		ArrayList<Person> people = new ArrayList<Person>();
-
+	private void readPersonFile(String personFilePath) throws FileNotFoundException, IOException {
 		// open and read person file
 		try (BufferedReader reader = new BufferedReader(new FileReader(personFilePath))) {
 			String line = reader.readLine();
@@ -59,28 +55,25 @@ public class Community {
 				String lastName = line.substring(lastNameSpace + 1);
 
 				// read line to get SSN
-				int SSN;
 				line = reader.readLine();
 				// get integer from end of string
 				int lastSNSpace = line.lastIndexOf(" ");
 				String SNString = line.substring(lastSNSpace + 1);
-				int SN = Integer.parseInt(SNString);
+				int SSN = Integer.parseInt(SNString);
 
 				// read line to get mother's SSN
-				int motherSSN;
 				line = reader.readLine();
 				// get integer from end of string
 				int lastMotherSpace = line.lastIndexOf(" ");
 				String motherSNString = line.substring(lastMotherSpace + 1);
-				int motherSN = Integer.parseInt(motherSNString);
+				int motherSSN = Integer.parseInt(motherSNString);
 
 				// read line to get father's SSN
-				int fatherSSN;
 				line = reader.readLine();
 				// get integer from end of string
 				int lastFatherSpace = line.lastIndexOf(" ");
 				String fatherSNString = line.substring(lastFatherSpace + 1);
-				int fatherSN = Integer.parseInt(fatherSNString);
+				int fatherSSN = Integer.parseInt(fatherSNString);
 
 				// read line to get friends
 				line = reader.readLine();
@@ -103,13 +96,7 @@ public class Community {
 		}
 	}
 
-	// shuffle the people array list
-	ArrayList<String> shufflePeople = new ArrayList<String>();Collections.shuffle(shufflePeople);
-
-	// catch (IOException e) {
-	// }
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// args[0] is query file path
 		// args[1] is person file path
 
