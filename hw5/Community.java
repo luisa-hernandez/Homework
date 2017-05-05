@@ -21,81 +21,79 @@ public class Community {
 		// person files
 		readPersonFile(peopleFile);
 	}
-	
-	private void processQueries(){
-		for (String query: queries){
+
+	private void processQueries() {
+		for (String query : queries) {
 			String result = "";
-			
-			if (query.startsWith("NAME")){
-				result = nameOf();
-			}
-			else if (query.startsWith("FATHER")){
+			int id = Integer.parseInt(query.substring(query.lastIndexOf(" ") + 1));
+
+			if (query.startsWith("NAME")) {
+				result = nameOf(id);
+			} else if (query.startsWith("FATHER")) {
 				result = fatherOf();
-			}
-			else if (query.startsWith("MOTHER")){
+			} else if (query.startsWith("MOTHER")) {
 				result = motherOf();
-			}
-			else if (query.startsWith("HALF")){
+			} else if (query.startsWith("HALF")) {
 				result = halfSiblingsOf();
-			}
-			else if (query.startsWith("FULL")){
+			} else if (query.startsWith("FULL")) {
 				result = fullSiblingsOf();
-			}
-			else if (query.startsWith("CHILDREN")){
+			} else if (query.startsWith("CHILDREN")) {
 				result = childrenOf();
-			}
-			else if (query.startsWith("MUTUAL")){
+			} else if (query.startsWith("MUTUAL")) {
 				result = mutualFriendsOf();
-			}
-			else if (query.startsWith("INVERSE")){
+			} else if (query.startsWith("INVERSE")) {
 				result = inverseFriendsOf();
-			}
-			else{
-				//"WHO"
+			} else {
+				// "WHO"
 				result = mostMutualFriends();
 			}
-			
+
 			System.out.println(query + ": " + result);
 		}
-		
+
 	}
-	
-	private String nameOf(){
-		return "";
+
+	// TODO 2 -- start implementing methods, using PeopleTree.find()
+	private String nameOf(int id) {
+		// use PeopleTree.find() to get appropriate PNode
+		Person p = pTree.find(id).getValue();
+
+		// construct response and return below
+		return p.getFirstName();
 	}
-	
-	private String fatherOf(){
-		return "";
-	}
-	
-	private String motherOf(){
-		return "";
-	}
-	
-	private String halfSiblingsOf(){
-		return "";
-	}
-	
-	private String fullSiblingsOf(){
-		return "";
-	}
-	
-	private String childrenOf(){
-		return null;
-	}
-	
-	private String mutualFriendsOf(){
+
+	private String fatherOf() {
 		return "";
 	}
 
-	private String inverseFriendsOf(){
+	private String motherOf() {
 		return "";
 	}
-	
-	private String mostMutualFriends(){
+
+	private String halfSiblingsOf() {
 		return "";
 	}
-	
+
+	private String fullSiblingsOf() {
+		return "";
+	}
+
+	private String childrenOf() {
+		return null;
+	}
+
+	private String mutualFriendsOf() {
+		return "";
+	}
+
+	private String inverseFriendsOf() {
+		return "";
+	}
+
+	private String mostMutualFriends() {
+		return "";
+	}
+
 	private void readQueryFile(String queryFilePath) throws FileNotFoundException, IOException {
 		queries = new ArrayList<String>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(queryFilePath))) {
