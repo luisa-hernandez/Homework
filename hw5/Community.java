@@ -30,22 +30,22 @@ public class Community {
 			if (query.startsWith("NAME")) {
 				result = nameOf(id);
 			} else if (query.startsWith("FATHER")) {
-				result = fatherOf();
+				result = fatherOf(id);
 			} else if (query.startsWith("MOTHER")) {
-				result = motherOf();
+				result = motherOf(id);
 			} else if (query.startsWith("HALF")) {
-				result = halfSiblingsOf();
+				result = halfSiblingsOf(id);
 			} else if (query.startsWith("FULL")) {
-				result = fullSiblingsOf();
+				result = fullSiblingsOf(id);
 			} else if (query.startsWith("CHILDREN")) {
-				result = childrenOf();
+				result = childrenOf(id);
 			} else if (query.startsWith("MUTUAL")) {
-				result = mutualFriendsOf();
+				result = mutualFriendsOf(id);
 			} else if (query.startsWith("INVERSE")) {
-				result = inverseFriendsOf();
+				result = inverseFriendsOf(id);
 			} else {
 				// "WHO"
-				result = mostMutualFriends();
+				result = mostMutualFriends(id);
 			}
 
 			System.out.println(query + ": " + result);
@@ -62,35 +62,43 @@ public class Community {
 		return p.getFirstName();
 	}
 
-	private String fatherOf() {
+	private String fatherOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
-	private String motherOf() {
+	private String motherOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
-	private String halfSiblingsOf() {
+	private String halfSiblingsOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
-	private String fullSiblingsOf() {
+	private String fullSiblingsOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
-	private String childrenOf() {
+	private String childrenOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return null;
 	}
 
-	private String mutualFriendsOf() {
+	private String mutualFriendsOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
-	private String inverseFriendsOf() {
+	private String inverseFriendsOf(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
-	private String mostMutualFriends() {
+	private String mostMutualFriends(int id) {
+		Person p = pTree.find(id).getValue();
 		return "";
 	}
 
@@ -169,7 +177,7 @@ public class Community {
 		// args[0] is query file path
 		// args[1] is person file path
 
-		// TODO 0 - instantiate Community class w/ paths of files
+		// instantiate Community class w/ paths of files
 		Community community = new Community(args[0], args[1]);
 
 	}
