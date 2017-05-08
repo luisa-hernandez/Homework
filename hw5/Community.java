@@ -47,10 +47,9 @@ public class Community {
 				// "WHO"
 				result = mostMutualFriends(id);
 			}
-
+			
 			System.out.println(query + ": " + result);
 		}
-
 	}
 
 	// TODO 2 -- start implementing methods, using PeopleTree.find()
@@ -59,22 +58,29 @@ public class Community {
 		Person p = pTree.find(id).getValue();
 
 		// construct response and return below
-		return p.getFirstName();
+		return p.getFirstName() + " " + p.getLastName();
 	}
 
 	private String fatherOf(int id) {
 		Person p = pTree.find(id).getValue();
-		
-		return p.getFatherSSN();
+	
+		return nameOf(p.getFatherSSN());
 	}
 
 	private String motherOf(int id) {
 		Person p = pTree.find(id).getValue();
-		return p.getMotherSSN();
+		
+		return nameOf(p.getMotherSSN());
 	}
 
 	private String halfSiblingsOf(int id) {
 		Person p = pTree.find(id).getValue();
+		
+		ArrayList<String> halfSiblings = new ArrayList<String>();
+		
+		int fId = p.getFatherSSN();
+		int mIf = p.getMotherSSN();
+		
 		return "";
 	}
 
