@@ -124,12 +124,30 @@ public class Community {
 
 	private String mutualFriendsOf(int id) {
 		Person p = pTree.find(id).getValue();
-		return "";
+		ArrayList<Person> errybody = pTree.getAllValues();
+		String mutualFriends = "";
+		
+		for (Person somebody : errybody) {
+			if(p.getFriends() == somebody.getFriends()){
+				mutualFriends += " " + nameOf(somebody.getSSN());
+			}
+		}
+		return mutualFriends;
 	}
 
 	private String inverseFriendsOf(int id) {
 		Person p = pTree.find(id).getValue();
-		return p.getfriends();
+		ArrayList<Person> errybody = pTree.getAllValues();
+		String inverseFriends = " ";
+		
+		for (Person somebody : errybody) {
+			if((p.getFriends() == somebody.getFriends() && somebody.getFriends() != p.getFriends()) ||
+					p.getFriends() != somebody.getFriends() && somebody.getFriends() == p.getFriends() ){
+				inverseFriends += " " + nameOf(somebody.getSSN());
+			}
+		}
+		
+		return inverseFriends;
 	}
 
 	private String mostMutualFriends(int id) {
