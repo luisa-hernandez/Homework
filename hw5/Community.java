@@ -64,12 +64,13 @@ public class Community {
 
 	private String fatherOf(int id) {
 		Person p = pTree.find(id).getValue();
-		return "";
+		
+		return p.getFatherSSN();
 	}
 
 	private String motherOf(int id) {
 		Person p = pTree.find(id).getValue();
-		return "";
+		return p.getMotherSSN();
 	}
 
 	private String halfSiblingsOf(int id) {
@@ -78,13 +79,13 @@ public class Community {
 	}
 
 	private String fullSiblingsOf(int id) {
-		Person p = pTree.find(id).getValue();
-		return "";
+		//Person p = pTree.find(id).getValue();
+		//return "";
 	}
 
 	private String childrenOf(int id) {
-		Person p = pTree.find(id).getValue();
-		return null;
+		//Person p = pTree.find(id).getValue();
+		//return null;
 	}
 
 	private String mutualFriendsOf(int id) {
@@ -94,7 +95,7 @@ public class Community {
 
 	private String inverseFriendsOf(int id) {
 		Person p = pTree.find(id).getValue();
-		return "";
+		return p.getfriends();
 	}
 
 	private String mostMutualFriends(int id) {
