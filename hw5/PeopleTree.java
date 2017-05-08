@@ -1,5 +1,7 @@
 package hw5;
 
+import java.util.ArrayList;
+
 public class PeopleTree<K extends Comparable<K>, V> {
 
 	PNode<K, V> root;
@@ -65,11 +67,41 @@ public class PeopleTree<K extends Comparable<K>, V> {
 						current = current.getRight();
 					}
 				}
-
 			}
+		}
+	}
 
+	public ArrayList<V> getAllValues() {
+		ArrayList<V> allValues = new ArrayList<V>();
+		ArrayList<PNode<K, V>> allNodes = getValues(root);
+		for (PNode<K, V> node : allNodes) {
+			allValues.add(node.getValue());
 		}
 
+		return allValues;
+	}
+
+	public ArrayList<PNode<K, V>> getValues(PNode<K, V> n) {
+		ArrayList<PNode<K, V>> values = new ArrayList<PNode<K, V>>();
+		if (n == null) {
+			return values;
+		}
+
+		// get left and right children
+		PNode<K, V> left = n.getLeft();
+		PNode<K, V> right = n.getRight();
+
+		for (PNode<K, V> node : getValues(left)) {
+			values.add(node);
+		}
+
+		values.add(n);
+
+		for (PNode<K, V> node : getValues(right)) {
+			values.add(node);
+		}
+
+		return values;
 	}
 
 }

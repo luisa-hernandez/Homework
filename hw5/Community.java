@@ -47,7 +47,7 @@ public class Community {
 				// "WHO"
 				result = mostMutualFriends(id);
 			}
-			
+
 			System.out.println(query + ": " + result);
 		}
 	}
@@ -63,35 +63,63 @@ public class Community {
 
 	private String fatherOf(int id) {
 		Person p = pTree.find(id).getValue();
-	
+
 		return nameOf(p.getFatherSSN());
 	}
 
 	private String motherOf(int id) {
 		Person p = pTree.find(id).getValue();
-		
+
 		return nameOf(p.getMotherSSN());
 	}
 
 	private String halfSiblingsOf(int id) {
 		Person p = pTree.find(id).getValue();
-		
-		ArrayList<String> halfSiblings = new ArrayList<String>();
-		
+
 		int fId = p.getFatherSSN();
 		int mIf = p.getMotherSSN();
-		
-		return "";
+
+		ArrayList<Person> errybody = pTree.getAllValues();
+		String halfSiblings = "";
+
+		for (Person somebody : errybody) {
+			if ((somebody.getFatherSSN() == fId && somebody.getMotherSSN() != mIf)
+					|| (somebody.getMotherSSN() == mIf && somebody.getFatherSSN() != fId)) {
+				halfSiblings += " " + nameOf(somebody.getSSN());
+			}
+		}
+		return halfSiblings;
 	}
 
 	private String fullSiblingsOf(int id) {
-		//Person p = pTree.find(id).getValue();
-		//return "";
+		Person p = pTree.find(id).getValue();
+
+		int fId = p.getFatherSSN();
+		int mIf = p.getMotherSSN();
+
+		ArrayList<Person> errybody = pTree.getAllValues();
+		String siblings = "";
+
+		for (Person somebody : errybody) {
+			if (somebody.getFatherSSN() == fId && somebody.getMotherSSN() == mIf) {
+				siblings += " " + nameOf(somebody.getSSN());
+			}
+		}
+		return siblings;
 	}
 
 	private String childrenOf(int id) {
-		//Person p = pTree.find(id).getValue();
-		//return null;
+		Person p = pTree.find(id).getValue();
+		ArrayList<Person> errybody = pTree.getAllValues();
+		String childrenOf = "";
+
+		for (Person somebody : errybody) {
+			if (p.getMotherSSN() == somebody.getSSN() || p.getFatherSSN() == somebody.getSSN()) {
+				childrenOf += " " + nameOf(somebody.getSSN());
+			}
+		}
+
+		return childrenOf;
 	}
 
 	private String mutualFriendsOf(int id) {
