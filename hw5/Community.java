@@ -15,11 +15,15 @@ public class Community {
 	private PeopleTree<Integer, Person> pTree;
 
 	public Community(String peopleFile, String queryFile) throws FileNotFoundException, IOException {
+		pTree = new PeopleTree<Integer, Person>();
 		// query file
 		readQueryFile(queryFile);
 
 		// person files
 		readPersonFile(peopleFile);
+		
+		//print the goods
+		processQueries();
 	}
 
 	private void processQueries() {
@@ -194,10 +198,9 @@ public class Community {
 	private void readPersonFile(String personFilePath) throws FileNotFoundException, IOException {
 		// open and read person file
 		try (BufferedReader reader = new BufferedReader(new FileReader(personFilePath))) {
-			String line = "";
+			// read line to get first name
+			String line = reader.readLine();
 			while (line != null) {
-				// read line to get first name
-				line = reader.readLine();
 				// get first name from end of string
 				int firstNameSpace = line.lastIndexOf(" ");
 				String firstName = line.substring(firstNameSpace + 1);
@@ -222,7 +225,7 @@ public class Community {
 				int lastFatherSpace = line.lastIndexOf(" ");
 				String fatherSNString = line.substring(lastFatherSpace + 1);
 				int fatherSSN = Integer.parseInt(fatherSNString);
-				
+
 				// read line to get mother's SSN
 				line = reader.readLine();
 				// get integer from end of string
@@ -242,13 +245,19 @@ public class Community {
 					intFriends.add(Integer.parseInt(friends[i]));
 				}
 
+				// read blank line
+				reader.readLine();
+				
+				// read line to get first name of next person
+				line = reader.readLine();
+				
+
 				// create a person and add each one to the people array list
 				Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, intFriends);
 
 				// insert person into people tree
-				pTree.insert(SSN, p);
-				
-				line = reader.readLine();
+				pTree.insert(new Integer(SSN), p);
+
 			}
 		}
 	}
