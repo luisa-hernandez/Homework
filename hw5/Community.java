@@ -124,35 +124,60 @@ public class Community {
 
 	private String mutualFriendsOf(int id) {
 		Person p = pTree.find(id).getValue();
-		ArrayList<Person> errybody = pTree.getAllValues();
 		String mutualFriends = "";
 		
-		for (Person somebody : errybody) {
-			if(p.getFriends() == somebody.getFriends()){
-				mutualFriends += " " + nameOf(somebody.getSSN());
+		for (int friendId : p.getFriends()) {
+			Person friend = pTree.find(friendId).getValue();
+			ArrayList<Integer> friendsOfFriends = friend.getFriends();
+			
+			if (friendsOfFriends.contains(id)){
+				mutualFriends += " " + nameOf(friendId);
 			}
 		}
+		
 		return mutualFriends;
 	}
 
 	private String inverseFriendsOf(int id) {
-		Person p = pTree.find(id).getValue();
 		ArrayList<Person> errybody = pTree.getAllValues();
 		String inverseFriends = " ";
 		
 		for (Person somebody : errybody) {
-			if((p.getFriends() == somebody.getFriends() && somebody.getFriends() != p.getFriends()) ||
-					p.getFriends() != somebody.getFriends() && somebody.getFriends() == p.getFriends() ){
-				inverseFriends += " " + nameOf(somebody.getSSN());
+			if (somebody.getFriends().contains(id)){
+				inverseFriends += "  " + nameOf(id);
 			}
 		}
 		
 		return inverseFriends;
 	}
-
-	private String mostMutualFriends(int id) {
+	
+	private int countMutualFriends(int id){
 		Person p = pTree.find(id).getValue();
-		return "";
+		int friendsCount = 0;
+		
+		for (int friendId : p.getFriends()) {
+			Person friend = pTree.find(friendId).getValue();
+			ArrayList<Integer> friendsOfFriends = friend.getFriends();
+			
+			if (friendsOfFriends.contains(id)){
+				friendsCount++;
+			}
+		}
+		
+		return friendsCount;
+	}
+
+	private String mostMutualFriends() {
+		ArrayList<Person> errybody = pTree.getAllValues();
+		Person mostFriends = errybody.get(0);
+
+		for (Person somebody : errybody){
+			if(countMutualFriends(somebody.getSSN()) > countMutualFriends(mostFriends.getSSN())){
+				mostFriends = somebody;
+			}
+		}
+		
+		return nameOf(mostFriends.getSSN());
 	}
 
 	private void readQueryFile(String queryFilePath) throws FileNotFoundException, IOException {
