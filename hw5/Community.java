@@ -194,7 +194,7 @@ public class Community {
 	private void readPersonFile(String personFilePath) throws FileNotFoundException, IOException {
 		// open and read person file
 		try (BufferedReader reader = new BufferedReader(new FileReader(personFilePath))) {
-			String line = reader.readLine();
+			String line = "";
 			while (line != null) {
 				// read line to get first name
 				line = reader.readLine();
@@ -216,19 +216,19 @@ public class Community {
 				String SNString = line.substring(lastSNSpace + 1);
 				int SSN = Integer.parseInt(SNString);
 
-				// read line to get mother's SSN
-				line = reader.readLine();
-				// get integer from end of string
-				int lastMotherSpace = line.lastIndexOf(" ");
-				String motherSNString = line.substring(lastMotherSpace + 1);
-				int motherSSN = Integer.parseInt(motherSNString);
-
 				// read line to get father's SSN
 				line = reader.readLine();
 				// get integer from end of string
 				int lastFatherSpace = line.lastIndexOf(" ");
 				String fatherSNString = line.substring(lastFatherSpace + 1);
 				int fatherSSN = Integer.parseInt(fatherSNString);
+				
+				// read line to get mother's SSN
+				line = reader.readLine();
+				// get integer from end of string
+				int lastMotherSpace = line.lastIndexOf(" ");
+				String motherSNString = line.substring(lastMotherSpace + 1);
+				int motherSSN = Integer.parseInt(motherSNString);
 
 				// read line to get friends
 				line = reader.readLine();
@@ -247,6 +247,8 @@ public class Community {
 
 				// insert person into people tree
 				pTree.insert(SSN, p);
+				
+				line = reader.readLine();
 			}
 		}
 	}
