@@ -45,7 +45,7 @@ public class Community {
 				result = inverseFriendsOf(id);
 			} else {
 				// "WHO"
-				result = mostMutualFriends(id);
+				result = mostMutualFriends();
 			}
 
 			System.out.println(query + ": " + result);
@@ -125,45 +125,45 @@ public class Community {
 	private String mutualFriendsOf(int id) {
 		Person p = pTree.find(id).getValue();
 		String mutualFriends = "";
-		
+
 		for (int friendId : p.getFriends()) {
 			Person friend = pTree.find(friendId).getValue();
 			ArrayList<Integer> friendsOfFriends = friend.getFriends();
-			
-			if (friendsOfFriends.contains(id)){
+
+			if (friendsOfFriends.contains(id)) {
 				mutualFriends += " " + nameOf(friendId);
 			}
 		}
-		
+
 		return mutualFriends;
 	}
 
 	private String inverseFriendsOf(int id) {
 		ArrayList<Person> errybody = pTree.getAllValues();
 		String inverseFriends = " ";
-		
+
 		for (Person somebody : errybody) {
-			if (somebody.getFriends().contains(id)){
+			if (somebody.getFriends().contains(id)) {
 				inverseFriends += "  " + nameOf(id);
 			}
 		}
-		
+
 		return inverseFriends;
 	}
-	
-	private int countMutualFriends(int id){
+
+	private int countMutualFriends(int id) {
 		Person p = pTree.find(id).getValue();
 		int friendsCount = 0;
-		
+
 		for (int friendId : p.getFriends()) {
 			Person friend = pTree.find(friendId).getValue();
 			ArrayList<Integer> friendsOfFriends = friend.getFriends();
-			
-			if (friendsOfFriends.contains(id)){
+
+			if (friendsOfFriends.contains(id)) {
 				friendsCount++;
 			}
 		}
-		
+
 		return friendsCount;
 	}
 
@@ -171,12 +171,12 @@ public class Community {
 		ArrayList<Person> errybody = pTree.getAllValues();
 		Person mostFriends = errybody.get(0);
 
-		for (Person somebody : errybody){
-			if(countMutualFriends(somebody.getSSN()) > countMutualFriends(mostFriends.getSSN())){
+		for (Person somebody : errybody) {
+			if (countMutualFriends(somebody.getSSN()) > countMutualFriends(mostFriends.getSSN())) {
 				mostFriends = somebody;
 			}
 		}
-		
+
 		return nameOf(mostFriends.getSSN());
 	}
 
