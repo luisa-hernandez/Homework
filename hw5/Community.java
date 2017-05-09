@@ -21,16 +21,19 @@ public class Community {
 
 		// person files
 		readPersonFile(peopleFile);
-		
-		//print the goods
+
+		// print the goods
 		processQueries();
 	}
 
 	private void processQueries() {
 		for (String query : queries) {
 			String result = "";
-			int id = Integer.parseInt(query.substring(query.lastIndexOf(" ") + 1));
 
+			int id = -1;
+			if (!query.startsWith("WHO")) {
+				id = Integer.parseInt(query.substring(query.lastIndexOf(" ") + 1));
+			}
 			if (query.startsWith("NAME")) {
 				result = nameOf(id);
 			} else if (query.startsWith("FATHER")) {
@@ -247,10 +250,9 @@ public class Community {
 
 				// read blank line
 				reader.readLine();
-				
+
 				// read line to get first name of next person
 				line = reader.readLine();
-				
 
 				// create a person and add each one to the people array list
 				Person p = new Person(firstName, lastName, SSN, fatherSSN, motherSSN, intFriends);
