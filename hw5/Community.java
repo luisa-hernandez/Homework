@@ -149,9 +149,12 @@ public class Community {
 		ArrayList<Person> errybody = pTree.getAllValues();
 		String inverseFriends = " ";
 
-		for (Person somebody : errybody) {
-			if (somebody.getFriends().contains(id)) {
-				inverseFriends += "  " + nameOf(id);
+		Person me = pTree.find(id).getValue();
+		for (Person whoever : errybody) {
+			if(!me.getFriends().contains(whoever.getSSN())){
+				if (whoever.getFriends().contains(id)){
+					inverseFriends += " " + nameOf(whoever.getSSN());
+				}
 			}
 		}
 
