@@ -28,6 +28,8 @@ public class Cluster {
 		members.remove(name);
 		calculateRepresentative();
 	}
+	
+	
 
 	// calculate representatives
 	public void calculateRepresentative() {
@@ -48,6 +50,10 @@ public class Cluster {
 			sum += Math.pow(representative.get(i) - purchases.get(i), 2);
 		}
 		return Math.sqrt(sum);
+	}
+
+	public HashMap<String, ArrayList<Double>> getMembers() {
+		return members;
 	}
 	
 }
