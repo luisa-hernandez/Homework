@@ -7,18 +7,33 @@ import java.io.IOException;
 import java.util.*;
 
 public class Kmeans {
-
 	//data matrix 
 	HashMap<String, ArrayList> purchaseInfo;
+	int initialK;
+	ArrayList<Cluster> clusters;
 	
 	// constructor
-	public Kmeans(String campaignInfo, String purchaseHistory) throws FileNotFoundException, IOException {
-
+	public Kmeans(String campaignInfo, String purchaseHistory, int initialK) throws FileNotFoundException, IOException {
+		this.initialK = initialK;
 		// create hashmap
 		purchaseInfo = new HashMap<String, ArrayList>();
+		clusters = new ArrayList<Cluster>();
 
 		// step 1: read purchase history data from file
 		makeDataMatrix(purchaseHistory);
+		
+	}
+	
+	private void createClusters(){
+		ArrayList<String> names = new ArrayList<String>(purchaseInfo.keySet());
+		Random rand = new Random();
+		for(int i=0; i<initialK; i++){
+			int n = rand.nextInt(names.size() + 1);
+			String name = names.get(n);
+			
+		}
+		
+		
 		
 	}
 	
@@ -64,7 +79,7 @@ public class Kmeans {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
 		// create customers object
-		Kmeans customers = new Kmeans(args[1], args[0]);
+		Kmeans customers = new Kmeans(args[1], args[0], 10);
 	}
 
 }
