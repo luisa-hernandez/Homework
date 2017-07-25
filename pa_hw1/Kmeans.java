@@ -36,6 +36,11 @@ public class Kmeans {
 		}
 	}
 	
+	private void addMembers(){
+		
+	}
+	
+
 	private void makeDataMatrix(String purchaseHistory) throws FileNotFoundException, IOException{
 		try (BufferedReader reader = new BufferedReader(new FileReader(purchaseHistory))) {
 			// read first line

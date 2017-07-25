@@ -41,4 +41,13 @@ public class Cluster {
 			representative.set(i, average);
 		}
 	}
+	
+	public double calculateDistance(ArrayList<Double> purchases){
+		double sum = 0.;
+		for (int i = 0; i< purchases.size(); i++){
+			sum += Math.pow(representative.get(i) - purchases.get(i), 2);
+		}
+		return Math.sqrt(sum);
+	}
+	
 }
