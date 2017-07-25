@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Kmeans {
 	//data matrix 
-	HashMap<String, ArrayList> purchaseInfo;
+	HashMap<String, ArrayList<Double>> purchaseInfo;
 	int initialK;
 	ArrayList<Cluster> clusters;
 	
@@ -16,7 +17,7 @@ public class Kmeans {
 	public Kmeans(String campaignInfo, String purchaseHistory, int initialK) throws FileNotFoundException, IOException {
 		this.initialK = initialK;
 		// create hashmap
-		purchaseInfo = new HashMap<String, ArrayList>();
+		purchaseInfo = new HashMap<String, ArrayList<Double>>();
 		clusters = new ArrayList<Cluster>();
 
 		// step 1: read purchase history data from file
@@ -36,11 +37,19 @@ public class Kmeans {
 		}
 	}
 	
-	private void addMembers(){
+	private void assignClusters(){
+		for (Entry<String, ArrayList<Double>> purchases: purchaseInfo.entrySet()){
+			//step 1: calculate distance for each cluster & store it
+			ArrayList<Double> distances = new ArrayList<Double>();
+			
+			
+			//step 2: determine cluster with smaller distance
+			
+			//step 3: add customer to cluster
+		}
 		
 	}
 	
-
 	private void makeDataMatrix(String purchaseHistory) throws FileNotFoundException, IOException{
 		try (BufferedReader reader = new BufferedReader(new FileReader(purchaseHistory))) {
 			// read first line
@@ -56,10 +65,10 @@ public class Kmeans {
 
 				// put name and offer number in hashmap if not seen
 				if (!purchaseInfo.containsKey(name)) {
-					ArrayList<Integer> purchases = new ArrayList<Integer>();
+					ArrayList<Double> purchases = new ArrayList<Double>();
 					// add 32 0's to arraylist
 					for (int i = 0; i < 32; i++) {
-						purchases.add(0);
+						purchases.add(0.);
 					}
 
 					// populate hashmap
@@ -67,9 +76,9 @@ public class Kmeans {
 				}
 
 				// updates customer purchase info
-				ArrayList<Integer> purchases = purchaseInfo.get(name);
+				ArrayList<Double> purchases = purchaseInfo.get(name);
 				// update purchases
-				purchases.set(offerNumber - 1, 1);
+				purchases.set(offerNumber - 1, 1.);
 				
 				// read line to get name
 				line = reader.readLine();
