@@ -9,17 +9,17 @@ public class Cluster {
 	// put everyone in a cluster
 
 	// create hashmap to hold members
-	private HashMap<String, ArrayList<Integer>> members;
+	private HashMap<String, ArrayList<Double>> members;
 	// representative
 	private ArrayList<Double> representative;
 
 	// creates a new cluster
 	public Cluster(ArrayList<Double> representative) {
-		members = new HashMap<String, ArrayList<Integer>>();
+		members = new HashMap<String, ArrayList<Double>>();
 		this.representative = representative;
 	}
 
-	public void addMember(String name, ArrayList<Integer> purchases) {
+	public void addMember(String name, ArrayList<Double> purchases) {
 		members.put(name, purchases);
 		calculateRepresentative();
 	}
@@ -32,9 +32,9 @@ public class Cluster {
 	// calculate representatives
 	public void calculateRepresentative() {
 		for (int i = 0; i < representative.size(); i++) {
-			Integer sum = 0;
-			for (Entry<String, ArrayList<Integer>> member: members.entrySet()) {
-				Integer value = member.getValue().get(i);
+			Double sum = 0.;
+			for (Entry<String, ArrayList<Double>> member: members.entrySet()) {
+				Double value = member.getValue().get(i);
 				sum = sum + value;
 			}
 			Double average = (double) (sum/representative.size());

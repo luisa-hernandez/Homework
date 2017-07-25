@@ -30,11 +30,10 @@ public class Kmeans {
 		for(int i=0; i<initialK; i++){
 			int n = rand.nextInt(names.size() + 1);
 			String name = names.get(n);
-			
+			ArrayList<Double> purchases = purchaseInfo.get(name);
+			Cluster initialCluster = new Cluster(purchases);
+			clusters.add(initialCluster);
 		}
-		
-		
-		
 	}
 	
 	private void makeDataMatrix(String purchaseHistory) throws FileNotFoundException, IOException{
