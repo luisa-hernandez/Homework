@@ -7,34 +7,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Sentiment {
+public class SentimentAnalyzer {
 
 	// create hashmap to hold source objects
 	private HashMap<String, ArrayList<String>> sources;
+	// comments
+	private ArrayList<String> comments;
 
-	public Sentiment() {
-		// 1: create sources hashmap
-
-		// 2: insert each source object with a blank arraylist
-		// MSNBC
-		// youngTurks
-		// BBC
-		// CNN
-		// deFranco
-		// Fox
-		// Jones
-
-	}
+	// create source objects
+	Sentiment MSNBC = new Sentiment();
+	Sentiment youngTurks = new Sentiment();
+	Sentiment BBC = new Sentiment();
+	Sentiment CNN = new Sentiment();
+	Sentiment deFranco = new Sentiment();
+	Sentiment Fox = new Sentiment();
+	Sentiment Jones = new Sentiment();
 
 	private void readFile(String commentData) throws FileNotFoundException, IOException {
 		try (BufferedReader reader = new BufferedReader(new FileReader(commentData))) {
-
+			
 			// read first line
 			String line = reader.readLine();
-
-			// read comments and insert into data source object
+			
+			//read comments and insert into data source object 
 			while (line != null && line != "") {
-
+				
+				
 			}
 
 		}
