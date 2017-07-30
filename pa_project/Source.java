@@ -14,8 +14,16 @@ public class Source {
 		topics = new HashMap<String, ArrayList<String>>();
 	}
 	
-	public void addComment(String topic){
-		
+	public void addComment(String topic, String comment){
+		topics.get(topic).add(comment);	
+	}
+	
+	public void addTopic(String topic){
+		topics.put(topic, new ArrayList<String>());
+	}
+	
+	public ArrayList<String> getTopicComments(String topic){
+		return topics.get(topic);
 	}
 
 }
