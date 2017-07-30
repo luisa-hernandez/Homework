@@ -47,6 +47,10 @@ public class Sentiment {
 
 		}
 	}
+	
+	private void addComment(String source, String topic){
+		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
