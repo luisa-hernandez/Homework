@@ -10,11 +10,11 @@ import java.util.HashMap;
 public class Sentiment {
 
 	// create hashmap to hold source objects
-	private HashMap<String, ArrayList<String>> sources;
+	private HashMap<String, Source> sources;
 
 	public Sentiment() {
 		// 1: create sources hashmap
-		sources = new HashMap<String, ArrayList<String>>();
+		sources = new HashMap<String, Source>();
 
 		// 2: insert each source object with a blank arraylist
 		// MSNBC
@@ -25,13 +25,13 @@ public class Sentiment {
 		// Fox
 		// Jones
 		
-		sources.put("MSNBC", new ArrayList<String>());
-		sources.put("youngTurks", new ArrayList<String>());
-		sources.put("BBC", new ArrayList<String>());
-		sources.put("CNN", new ArrayList<String>());
-		sources.put("deFranco", new ArrayList<String>());
-		sources.put("Fox", new ArrayList<String>());
-		sources.put("Jones", new ArrayList<String>());
+		sources.put("MSNBC", new Source());
+		sources.put("youngTurks", new Source());
+		sources.put("BBC", new Source());
+		sources.put("CNN", new Source());
+		sources.put("deFranco", new Source());
+		sources.put("Fox", new Source());
+		sources.put("Jones", new Source());
 	}
 
 	private void readFile(String filePath) throws FileNotFoundException, IOException {
