@@ -24,7 +24,7 @@ public class Sentiment {
 		// deFranco
 		// Fox
 		// Jones
-		
+
 		sources.put("MSNBC", new Source());
 		sources.put("youngTurks", new Source());
 		sources.put("BBC", new Source());
@@ -39,17 +39,42 @@ public class Sentiment {
 
 			// read first line
 			String line = reader.readLine();
+			line = reader.readLine();
+
+			ArrayList<String> topics = new ArrayList<String>();
+			topics.add("testimony");
+			topics.add("fired");
+			topics.add("election");
+			topics.add("agreement");
+			topics.add("m_attack");
+			topics.add("l_attack");
+			topics.add("ban");
+			topics.add("pope");
+			topics.add("baseball");
 
 			// read comments and insert into data source object
 			while (line != null && line != "") {
 
-			}
+				String[] comments = line.split("\t");
+				int index = 0; 
+				
+				for (String topic : topics){
+					
+					for (String sourceName : sources.keySet()) {
+						Source source = sources.get(sourceName);
+						String comment = comments[index];
+						source.addComment(topic, comment);
+						index++;
+					}
+				}
 
+				line = reader.readLine();
+			}
 		}
 	}
-	
-	private void addComment(String source, String topic){
-		
+
+	private void addComment(String source, String topic) {
+
 	}
 
 	public static void main(String[] args) {
