@@ -14,6 +14,7 @@ public class Sentiment {
 
 	public Sentiment() {
 		// 1: create sources hashmap
+		sources = new HashMap<String, ArrayList<String>>();
 
 		// 2: insert each source object with a blank arraylist
 		// MSNBC
@@ -23,11 +24,18 @@ public class Sentiment {
 		// deFranco
 		// Fox
 		// Jones
-
+		
+		sources.put("MSNBC", new ArrayList<String>());
+		sources.put("youngTurks", new ArrayList<String>());
+		sources.put("BBC", new ArrayList<String>());
+		sources.put("CNN", new ArrayList<String>());
+		sources.put("deFranco", new ArrayList<String>());
+		sources.put("Fox", new ArrayList<String>());
+		sources.put("Jones", new ArrayList<String>());
 	}
 
-	private void readFile(String commentData) throws FileNotFoundException, IOException {
-		try (BufferedReader reader = new BufferedReader(new FileReader(commentData))) {
+	private void readFile(String filePath) throws FileNotFoundException, IOException {
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
 			// read first line
 			String line = reader.readLine();
