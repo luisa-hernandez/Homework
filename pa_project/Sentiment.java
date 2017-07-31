@@ -10,9 +10,9 @@ import java.util.HashMap;
 public class Sentiment {
 
 	// create hashmap to hold source objects
-	private HashMap<String, Source> sources;
+	public HashMap<String, Source> sources;
 
-	public Sentiment() {
+	public Sentiment(String commentData) {
 		// 1: create sources hashmap
 		sources = new HashMap<String, Source>();
 
@@ -25,13 +25,26 @@ public class Sentiment {
 		// Fox
 		// Jones
 
-		sources.put("MSNBC", new Source());
-		sources.put("youngTurks", new Source());
-		sources.put("BBC", new Source());
-		sources.put("CNN", new Source());
-		sources.put("deFranco", new Source());
-		sources.put("Fox", new Source());
-		sources.put("Jones", new Source());
+		Source source = new Source();
+		sources.put("MSNBC", source);
+		
+		source = new Source();
+		sources.put("youngTurks", source);
+		
+		source = new Source();
+		sources.put("BBC", source);
+		
+		source = new Source();
+		sources.put("CNN", source);
+		
+		source = new Source();
+		sources.put("deFranco", source);
+		
+		source = new Source();
+		sources.put("Fox", source);
+		
+		source = new Source();
+		sources.put("Jones", source);
 	}
 
 	private void readFile(String filePath) throws FileNotFoundException, IOException {
@@ -73,12 +86,10 @@ public class Sentiment {
 		}
 	}
 
-	private void addComment(String source, String topic) {
-
-	}
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Sentiment internetComments = new Sentiment(args[0]);
+			Source CNN = internetComments.sources.get("CNN");
+			System.out.println("");
 
 	}
 
