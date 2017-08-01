@@ -6,13 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Sentiment {
 
 	// create hashmap to hold source objects
 	public HashMap<String, Source> sources;
 
-	public Sentiment(String commentData) {
+ 	public Sentiment(String commentData) {
 		// 1: create sources hashmap
 		sources = new HashMap<String, Source>();
 
@@ -47,10 +48,24 @@ public class Sentiment {
 //		sources.put("Jones", source);
 		
 		//1: make an array list of strings
+		ArrayList<String> sourceNames = new ArrayList<String>();
 		
 		//2: insert source names into array list
+		sourceNames.add("MSNBC");
+		sourceNames.add("youngTurks");
+		sourceNames.add("BBC");
+//		sourceNames.add("CNN");
+//		sourceNames.add("deFranco");
+//		sourceNames.add("Fox");
+//		sourceNames.add("Jones");
+		
 		
 		//3: use a loop on this array list to add each source to our source list
+		for (String name : sourceNames){
+			Source s = new Source();
+			sources.put(name, s);
+		}
+		System.out.println();
 	}
 
 	private void readFile(String filePath) throws FileNotFoundException, IOException {
