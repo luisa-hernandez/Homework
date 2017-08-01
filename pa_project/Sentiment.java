@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,11 +64,23 @@ public class Sentiment {
 			}
 
 			// read comments and insert into data source object
+			
+			//step 1: determine size of data grid
+			ArrayList<String> dataGrid;
+			//step 2: create array list of source names to maintain order
+			
+			
 			while (line != null && line != "") {
-
 				String[] comments = line.split("\t");
+				dataGrid = (ArrayList<String>) Arrays.asList(comments);
+				//step 3: check for correct amount of values
+				//step 4: insert null in extra spaces
+				while(dataGrid.size() < topics.size() * sources.size()){
+					dataGrid.add(null);
+				}
+				
 				int index = 0;
-
+					
 				for (String topic : topics) {
 
 					for (String sourceName : sources.keySet()) {
