@@ -54,6 +54,13 @@ public class Sentiment {
 			topics.add("ban");
 			topics.add("pope");
 			topics.add("baseball");
+			
+			//add topics to sources
+			for(Source source: sources.values()){
+				for(String topic: topics){
+					source.addTopic(topic);
+				}
+			}
 
 			// read comments and insert into data source object
 			while (line != null && line != "") {
@@ -76,8 +83,9 @@ public class Sentiment {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Sentiment internetComments = new Sentiment(args[0]);
+		internetComments.readFile(args[0]);
 		// Source CNN = internetComments.sources.get("CNN");
 		System.out.println("");
 
