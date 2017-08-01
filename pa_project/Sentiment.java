@@ -13,55 +13,24 @@ public class Sentiment {
 	// create hashmap to hold source objects
 	public HashMap<String, Source> sources;
 
- 	public Sentiment(String commentData) {
+	public Sentiment(String commentData) {
 		// 1: create sources hashmap
 		sources = new HashMap<String, Source>();
 
-		// 2: insert each source object with a blank arraylist
-		// MSNBC
-		// youngTurks
-		// BBC
-		// CNN
-		// deFranco
-		// Fox
-		// Jones
-
-//		Source source = new Source();
-//		sources.put("MSNBC", source);
-//		
-//		source = new Source();
-//		sources.put("youngTurks", source);
-//		
-//		source = new Source();
-//		sources.put("BBC", source);
-//		
-//		source = new Source();
-//		sources.put("CNN", source);
-//		
-//		source = new Source();
-//		sources.put("deFranco", source);
-//		
-//		source = new Source();
-//		sources.put("Fox", source);
-//		
-//		source = new Source();
-//		sources.put("Jones", source);
-		
-		//1: make an array list of strings
+		// insert each source object with a blank arraylist
 		ArrayList<String> sourceNames = new ArrayList<String>();
-		
-		//2: insert source names into array list
+
+		// insert source names into array list
 		sourceNames.add("MSNBC");
 		sourceNames.add("youngTurks");
 		sourceNames.add("BBC");
-//		sourceNames.add("CNN");
-//		sourceNames.add("deFranco");
-//		sourceNames.add("Fox");
-//		sourceNames.add("Jones");
-		
-		
-		//3: use a loop on this array list to add each source to our source list
-		for (String name : sourceNames){
+		sourceNames.add("CNN");
+		sourceNames.add("deFranco");
+		sourceNames.add("Fox");
+		sourceNames.add("Jones");
+
+		// use a loop on this array list to add each source to our source list
+		for (String name : sourceNames) {
 			Source s = new Source();
 			sources.put(name, s);
 		}
@@ -90,10 +59,10 @@ public class Sentiment {
 			while (line != null && line != "") {
 
 				String[] comments = line.split("\t");
-				int index = 0; 
-				
-				for (String topic : topics){
-					
+				int index = 0;
+
+				for (String topic : topics) {
+
 					for (String sourceName : sources.keySet()) {
 						Source source = sources.get(sourceName);
 						String comment = comments[index];
@@ -109,8 +78,8 @@ public class Sentiment {
 
 	public static void main(String[] args) {
 		Sentiment internetComments = new Sentiment(args[0]);
-			Source CNN = internetComments.sources.get("CNN");
-			System.out.println("");
+		// Source CNN = internetComments.sources.get("CNN");
+		System.out.println("");
 
 	}
 
