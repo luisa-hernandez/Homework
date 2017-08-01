@@ -13,6 +13,8 @@ public class Sentiment2 {
 
 	// create hashmap to hold source objects
 	private HashMap<String, Source> sources;
+	private ArrayList<String> sourceNames;
+	private ArrayList<String> topics;
 
 	// private ArrayList<String> sourceNames;
 
@@ -21,7 +23,7 @@ public class Sentiment2 {
 		sources = new HashMap<String, Source>();
 
 		// source names
-		ArrayList<String> sourceNames = new ArrayList<String>();
+		sourceNames = new ArrayList<String>();
 		sourceNames.add("MSNBC");
 		sourceNames.add("youngTurks");
 		sourceNames.add("BBC");
@@ -36,7 +38,7 @@ public class Sentiment2 {
 		}
 
 		// topic names
-		ArrayList<String> topics = new ArrayList<String>();
+		topics = new ArrayList<String>();
 		topics.add("testimony");
 		topics.add("fired");
 		topics.add("election");
@@ -57,7 +59,41 @@ public class Sentiment2 {
 
 		System.out.println();
 	}
-	//
+
+	public void readFile(String filePath) throws FileNotFoundException, IOException {
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+
+			// read first line
+			String line = reader.readLine();
+			line = reader.readLine();
+
+			while (line != null && line != "") {
+				// step 1: parse line
+				ArrayList<String> comments = new ArrayList();
+				comments.addAll(Arrays.asList(line.split("\t")));
+
+				// hard coded :(
+				while (comments.size() < 63) {
+					comments.add("");
+				}
+
+				// add comments to sources
+				for (String topicName : topics) {
+					for (String sourceName : sourceNames) {
+						sources.get(sourceName).addComment(topicName, comments.remove(0));
+					}
+				}
+
+				line = reader.readLine();
+
+			}
+			System.out.println();
+
+		}
+
+	}
+
 	// private void readFile(String filePath) throws FileNotFoundException,
 	// IOException {
 	// try (BufferedReader reader = new BufferedReader(new
@@ -126,10 +162,9 @@ public class Sentiment2 {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Sentiment2 internetComments = new Sentiment2(args[0]);
-		// internetComments.readFile(args[0]);
-		// // Source CNN = internetComments.sources.get("CNN");
-		// System.out.println("");
+		internetComments.readFile(args[0]);
 
+		System.out.println("");
 	}
 
 }
