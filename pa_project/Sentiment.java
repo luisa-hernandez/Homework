@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Sentiment2 {
+public class Sentiment {
 
 	// create hashmap to hold source objects
 	private HashMap<String, Source> sources;
@@ -18,7 +18,7 @@ public class Sentiment2 {
 
 	// private ArrayList<String> sourceNames;
 
-	public Sentiment2(String commentData) {
+	public Sentiment(String commentData) {
 		// 1: create sources hashmap
 		sources = new HashMap<String, Source>();
 
@@ -161,7 +161,7 @@ public class Sentiment2 {
 	// }
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		Sentiment2 internetComments = new Sentiment2(args[0]);
+		Sentiment internetComments = new Sentiment(args[0]);
 		internetComments.readFile(args[0]);
 
 		System.out.println("");
