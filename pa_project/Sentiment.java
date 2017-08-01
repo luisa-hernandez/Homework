@@ -12,7 +12,9 @@ import java.util.Map;
 public class Sentiment {
 
 	// create hashmap to hold source objects
-	public HashMap<String, Source> sources;
+	private HashMap<String, Source> sources;
+
+	private ArrayList<String> sourceNames;
 
 	public Sentiment(String commentData) {
 		// 1: create sources hashmap
@@ -21,14 +23,14 @@ public class Sentiment {
 		// insert each source object with a blank arraylist
 		ArrayList<String> sourceNames = new ArrayList<String>();
 
-		// insert source names into array list
-		sourceNames.add("MSNBC");
-		sourceNames.add("youngTurks");
-		sourceNames.add("BBC");
-		sourceNames.add("CNN");
-		sourceNames.add("deFranco");
-		sourceNames.add("Fox");
-		sourceNames.add("Jones");
+//		// insert source names into array list
+//		sourceNames.add("MSNBC");
+//		sourceNames.add("youngTurks");
+//		sourceNames.add("BBC");
+//		sourceNames.add("CNN");
+//		sourceNames.add("deFranco");
+//		sourceNames.add("Fox");
+//		sourceNames.add("Jones");
 
 		// use a loop on this array list to add each source to our source list
 		for (String name : sourceNames) {
@@ -45,6 +47,17 @@ public class Sentiment {
 			String line = reader.readLine();
 			line = reader.readLine();
 
+			sourceNames = new ArrayList<String>();
+
+			// insert source names into array list
+			sourceNames.add("MSNBC");
+			sourceNames.add("youngTurks");
+			sourceNames.add("BBC");
+			sourceNames.add("CNN");
+			sourceNames.add("deFranco");
+			sourceNames.add("Fox");
+			sourceNames.add("Jones");
+
 			ArrayList<String> topics = new ArrayList<String>();
 			topics.add("testimony");
 			topics.add("fired");
@@ -55,45 +68,40 @@ public class Sentiment {
 			topics.add("ban");
 			topics.add("pope");
 			topics.add("baseball");
-			
-			//add topics to sources
-			for(Source source: sources.values()){
-				for(String topic: topics){
+
+			// add topics to sources
+			for (Source source : sources.values()) {
+				for (String topic : topics) {
 					source.addTopic(topic);
 				}
 			}
 
 			// read comments and insert into data source object
-			
-			//step 1: determine size of data grid
-			ArrayList<String> dataGrid;
-			//step 2: create array list of source names to maintain order
-			
-			
-			while (line != null && line != "") {
-				String[] comments = line.split("\t");
-				dataGrid = (ArrayList<String>) Arrays.asList(comments);
-				//step 3: check for correct amount of values
-				//step 4: insert null in extra spaces
-				while(dataGrid.size() < topics.size() * sources.size()){
-					dataGrid.add(null);
-				}
-				
-				int index = 0;
-					
-				for (String topic : topics) {
 
-					for (String sourceName : sources.keySet()) {
-						Source source = sources.get(sourceName);
-						String comment = comments[index];
-						source.addComment(topic, comment);
-						index++;
+			// step 1: determine size of data grid
+			ArrayList<String> comments;
+			// step 2: create array list of source names to maintain order
+
+			while (line != null && line != "") {
+				comments = new ArrayList<String>();
+				comments.addAll(Arrays.asList(line.split("\t")));
+				// step 3: check for correct amount of values
+				// step 4: insert null in extra spaces
+				while (comments.size() < topics.size() * sources.size()) {
+					comments.add(null);
+				}
+
+				for (String sourceName : sourceNames) {
+					for (String topic : topics) {
+						sources.get(sourceName).addComment(topic, comments.remove(0));
+
 					}
 				}
-
 				line = reader.readLine();
 			}
+			System.out.println();
 		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
