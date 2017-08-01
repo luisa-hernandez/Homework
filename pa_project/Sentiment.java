@@ -25,26 +25,32 @@ public class Sentiment {
 		// Fox
 		// Jones
 
-		Source source = new Source();
-		sources.put("MSNBC", source);
+//		Source source = new Source();
+//		sources.put("MSNBC", source);
+//		
+//		source = new Source();
+//		sources.put("youngTurks", source);
+//		
+//		source = new Source();
+//		sources.put("BBC", source);
+//		
+//		source = new Source();
+//		sources.put("CNN", source);
+//		
+//		source = new Source();
+//		sources.put("deFranco", source);
+//		
+//		source = new Source();
+//		sources.put("Fox", source);
+//		
+//		source = new Source();
+//		sources.put("Jones", source);
 		
-		source = new Source();
-		sources.put("youngTurks", source);
+		//1: make an array list of strings
 		
-		source = new Source();
-		sources.put("BBC", source);
+		//2: insert source names into array list
 		
-		source = new Source();
-		sources.put("CNN", source);
-		
-		source = new Source();
-		sources.put("deFranco", source);
-		
-		source = new Source();
-		sources.put("Fox", source);
-		
-		source = new Source();
-		sources.put("Jones", source);
+		//3: use a loop on this array list to add each source to our source list
 	}
 
 	private void readFile(String filePath) throws FileNotFoundException, IOException {
