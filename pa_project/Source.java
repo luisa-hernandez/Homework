@@ -9,6 +9,7 @@ public class Source {
 	// topics this source handles
 	//key is topic name, value is list of comments related to topic
 	private HashMap<String, ArrayList<String>> topics;
+	
 
 	public Source(){
 		topics = new HashMap<String, ArrayList<String>>();
@@ -20,6 +21,10 @@ public class Source {
 	
 	public void addTopic(String topic){
 		topics.put(topic, new ArrayList<String>());
+	}
+	
+	public ArrayList<String> getTopic(String topic){
+		return topics.get(topic);
 	}
 	
 	public ArrayList<String> getTopicComments(String topic){

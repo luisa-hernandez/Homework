@@ -8,6 +8,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.neural.rnn.RNNCoreAnnotations;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.sentiment.SentimentCoreAnnotations.SentimentAnnotatedTree;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.util.CoreMap;
 
 public class Sentiment {
 
@@ -56,6 +65,47 @@ public class Sentiment {
 		}
 	}
 
+	public void processComments() {
+		for (String topic : topics) {
+			System.out.println(topic);
+			for (String sourceName : sourceNames) {
+				double sum = 0;
+				for (String comment : sources.get(sourceName).getTopic(topic)) {
+					sum += getSentiment(comment);
+				}
+				double average = sum / sources.get(sourceName).getTopic(topic).size();
+				System.out.println(sourceName + ": " + average);
+			}
+			System.out.println();
+		}
+	}
+
+	public int getSentiment(String line) {
+
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		int mainSentiment = 0;
+
+		if (line != null && line.length() > 0) {
+			int longest = 0;
+			Annotation annotation = pipeline.process(line);
+			for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
+				Tree tree = sentence.get(SentimentAnnotatedTree.class);
+				int sentiment = RNNCoreAnnotations.getPredictedClass(tree);
+				String partText = sentence.toString();
+				if (partText.length() > longest) {
+					mainSentiment = sentiment;
+					longest = partText.length();
+				}
+
+			}
+		}
+
+		System.out.println(mainSentiment);
+		return 0;
+	}
+
 	public void readFile(String filePath) throws FileNotFoundException, IOException {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			// read first line
@@ -78,17 +128,19 @@ public class Sentiment {
 						sources.get(sourceName).addComment(topicName, comments.remove(0));
 					}
 				}
-
 				line = reader.readLine();
 
+				System.out.println("");
+
 			}
+
 		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Sentiment internetComments = new Sentiment(args[0]);
 		internetComments.readFile(args[0]);
-
+		internetComments.processComments();
 		System.out.println("");
 	}
 
