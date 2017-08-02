@@ -1,4 +1,4 @@
-package com.sentiments.analyzers;
+package pa_project;
 
 import java.util.Properties;
 
