@@ -69,41 +69,39 @@ public class Sentiment {
 		for (String topic : topics) {
 			System.out.println(topic);
 			for (String sourceName : sourceNames) {
-				double sum = 0;
-				for (String comment : sources.get(sourceName).getTopic(topic)) {
-					sum += getSentiment(comment);
-				}
-				double average = sum / sources.get(sourceName).getTopic(topic).size();
-				System.out.println(sourceName + ": " + average);
+				System.out.println(sourceName + ": " + getSentiment(sources.get(sourceName).getTopic(topic)));
 			}
 			System.out.println();
 		}
 	}
 
-	public int getSentiment(String line) {
+	public double getSentiment(ArrayList<String> comments) {
 
 		Properties props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, parse, sentiment");
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-		int mainSentiment = 0;
 
-		if (line != null && line.length() > 0) {
-			int longest = 0;
-			Annotation annotation = pipeline.process(line);
-			for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-				Tree tree = sentence.get(SentimentAnnotatedTree.class);
-				int sentiment = RNNCoreAnnotations.getPredictedClass(tree);
-				String partText = sentence.toString();
-				if (partText.length() > longest) {
-					mainSentiment = sentiment;
-					longest = partText.length();
+		double sum = 0;
+		for (String comment : comments) {
+			int mainSentiment = 0;
+			if (comment != null && comment.length() > 0) {
+				int longest = 0;
+				Annotation annotation = pipeline.process(comment);
+				for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
+					Tree tree = sentence.get(SentimentAnnotatedTree.class);
+					int sentiment = RNNCoreAnnotations.getPredictedClass(tree);
+					String partText = sentence.toString();
+					if (partText.length() > longest) {
+						mainSentiment = sentiment;
+						longest = partText.length();
+					}
+
 				}
 
 			}
+			sum += mainSentiment;
 		}
-
-		System.out.println(mainSentiment);
-		return 0;
+		return sum / comments.size();
 	}
 
 	public void readFile(String filePath) throws FileNotFoundException, IOException {
